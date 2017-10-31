@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">441try</string>
+    <string name="action_overview">Overview</string>
+    <string name="action_learn">Learn the notes</string>
+    <string name="action_play">Play the music</string>
+    <string name="action_logout">Log out</string>
+    <string name="agreement">I agree all statements in <a>terms of service</a></string>
+</resources>
