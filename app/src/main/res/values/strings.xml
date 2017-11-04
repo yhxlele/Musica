@@ -1,8 +1,10 @@
 <resources>
-    <string name="app_name">441try</string>
+    <string name="app_name">441</string>
     <string name="action_overview">Overview</string>
     <string name="action_learn">Learn the notes</string>
     <string name="action_play">Play the music</string>
     <string name="action_logout">Log out</string>
     <string name="agreement">I agree all statements in <a>terms of service</a></string>
+    <string name="action_about">About</string>
+    <string name="learn_page">Learn the notes</string>
 </resources>

@@ -1,28 +1,25 @@
 package com.example.yhxle.a441try;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 /**
  * Created by yhxle on 10/30/2017.
  */
 
-public class LoginFragment extends Fragment implements View.OnClickListener {
+public class QuizFragment extends Fragment implements View.OnClickListener {
     public static final String TAG = "LoginFragment";
 
-    public LoginFragment() { super(); }
+    public QuizFragment() { super(); }
 
-    public static LoginFragment newInstance() {
-        LoginFragment fragment = new LoginFragment();
+    public static QuizFragment newInstance() {
+        QuizFragment fragment = new QuizFragment();
         return fragment;
     }
 
@@ -40,18 +37,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         Button login = (Button) view.findViewById(R.id.login);
         login.setOnClickListener(this);
         return view;
-
-
-
-
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login:
-                Intent intent = new Intent (getActivity(), LearnActivity.class);
-                startActivity (intent);
+                Toast.makeText(v.getContext(),"Log in", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
