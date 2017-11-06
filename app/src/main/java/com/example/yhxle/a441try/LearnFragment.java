@@ -9,6 +9,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.media.midi.*;
 import android.os.Bundle;
 import android.os.Handler;
@@ -224,6 +227,14 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 260, 540, 320);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
+
+                SoundPool sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+                /** soundId for Later handling of sound pool **/
+                int soundId = sp.load(getContext(), R.raw.e1, 1); // in 2nd param u have to pass your desire ringtone
+                sp.play(soundId, 1, 1, 0, 0, 1);
+                //MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.a1); // in 2nd param u have to pass your desire ringtone
+                //mPlayer.prepare();
+                //mPlayer.start();
                 break;
             }
             case R.id.L10: {
@@ -237,6 +248,14 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 290, 540, 350);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
+
+                //SoundPool sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+                /** soundId for Later handling of sound pool **/
+                //int soundId = sp.load(getContext(), R.raw.c1, 1); // in 2nd param u have to pass your desire ringtone
+                //sp.play(soundId, 1, 1, 0, 0, 1);
+                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.d1); // in 2nd param u have to pass your desire ringtone
+                //mPlayer.prepare();
+                mPlayer.start();
                 break;
             }
             case R.id.L11: {
@@ -250,6 +269,15 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 320, 540, 380);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
+
+
+                SoundPool sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+                /** soundId for Later handling of sound pool **/
+                int soundId = sp.load(getContext(), R.raw.c1, 1); // in 2nd param u have to pass your desire ringtone
+                sp.play(soundId, 1, 1, 0, 0, 1);
+                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.c1); // in 2nd param u have to pass your desire ringtone
+                //mPlayer.prepare();
+                mPlayer.start();
                 break;
             }
             case R.id.record: {
