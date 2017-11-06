@@ -12,6 +12,9 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://github.com/kshoji/BLE-MIDI-for-Android/raw/master/library/repository" }
+        maven { url "https://github.com/kshoji/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots" }
+        mavenCentral()
     }
 }
 
