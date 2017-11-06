@@ -123,6 +123,8 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 80, 540, 140);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
+                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_057);
+                mPlayer.start();
                 break;
             }
             case R.id.L2: {
@@ -136,6 +138,8 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 110, 540, 170);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
+                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_056);
+                mPlayer.start();
                 break;
             }
             case R.id.L3: {
@@ -149,6 +153,8 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 140, 540, 200);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
+                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_054);
+                mPlayer.start();
                 break;
             }
             case R.id.L4: {
@@ -162,6 +168,8 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 170, 540, 230);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
+                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_052);
+                mPlayer.start();
                 break;
             }
             case R.id.L5: {
@@ -175,6 +183,8 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 200, 540, 260);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
+                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_051);
+                mPlayer.start();
                 break;
             }
             case R.id.L6: {
@@ -188,6 +198,8 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 200, 540, 260);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
+                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_049);
+                mPlayer.start();
                 break;
             }
             case R.id.L7: {
@@ -201,6 +213,8 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 200, 540, 260);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
+                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_047);
+                mPlayer.start();
                 break;
             }
             case R.id.L8: {
@@ -214,6 +228,8 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 230, 540, 290);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
+                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_045);
+                mPlayer.start();
                 break;
             }
             case R.id.L9: {
@@ -227,14 +243,8 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 260, 540, 320);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
-
-                SoundPool sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
-                /** soundId for Later handling of sound pool **/
-                int soundId = sp.load(getContext(), R.raw.e1, 1); // in 2nd param u have to pass your desire ringtone
-                sp.play(soundId, 1, 1, 0, 0, 1);
-                //MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.a1); // in 2nd param u have to pass your desire ringtone
-                //mPlayer.prepare();
-                //mPlayer.start();
+                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_044);
+                mPlayer.start();
                 break;
             }
             case R.id.L10: {
@@ -248,13 +258,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 290, 540, 350);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
-
-                //SoundPool sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
-                /** soundId for Later handling of sound pool **/
-                //int soundId = sp.load(getContext(), R.raw.c1, 1); // in 2nd param u have to pass your desire ringtone
-                //sp.play(soundId, 1, 1, 0, 0, 1);
-                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.d1); // in 2nd param u have to pass your desire ringtone
-                //mPlayer.prepare();
+                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_042);
                 mPlayer.start();
                 break;
             }
@@ -269,14 +273,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 320, 540, 380);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
-
-
-                SoundPool sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
-                /** soundId for Later handling of sound pool **/
-                int soundId = sp.load(getContext(), R.raw.c1, 1); // in 2nd param u have to pass your desire ringtone
-                sp.play(soundId, 1, 1, 0, 0, 1);
-                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.c1); // in 2nd param u have to pass your desire ringtone
-                //mPlayer.prepare();
+                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_040);
                 mPlayer.start();
                 break;
             }
