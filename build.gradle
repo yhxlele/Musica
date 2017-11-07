@@ -14,6 +14,7 @@ allprojects {
         jcenter()
         maven { url "https://github.com/kshoji/BLE-MIDI-for-Android/raw/master/library/repository" }
         maven { url "https://github.com/kshoji/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots" }
+        maven { url "https://github.com/kshoji/javax.sound.midi-for-Android/raw/master/javax.sound.midi/repository"}
         mavenCentral()
     }
 }

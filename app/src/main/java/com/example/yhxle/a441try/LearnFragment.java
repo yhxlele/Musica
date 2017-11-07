@@ -1,5 +1,6 @@
 package com.example.yhxle.a441try;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
@@ -12,12 +13,17 @@ import android.graphics.RectF;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
-import android.media.midi.*;
+// import android.media.midi.*;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.BoolRes;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,12 +35,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.larvalabs.svgandroid.SVG;
 import com.larvalabs.svgandroid.SVGParser;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Vector;
+import java.util.concurrent.Exchanger;
+
+import jp.kshoji.javax.sound.midi.*;
 /**
  * Created by yhxle on 10/30/2017.
  */
 
 public class LearnFragment extends Fragment implements View.OnClickListener {
+
+
     public static final String TAG = "LoginFragment";
+    public static final int MY_PERMISSIONS_READ_EXTERNAL_FILE = 0;
+    public static final int MY_PERMISSIONS_WRITE_EXTERNAL_FILE = 1;
+    public static final int DAMPER_PEDAL = 64;
+    public static final int DAMPER_ON = 127;
+    public static final int DAMPER_OFF = 0;
+    public static final int END_OF_TRACK = 47;
+    public static final MediaPlayer mp = new MediaPlayer();
+
+    public static MediaPlayer mpp = new MediaPlayer();
 
     public LearnFragment() { super(); }
 
@@ -123,8 +147,10 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 80, 540, 140);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
-                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_057);
-                mPlayer.start();
+                mpp.reset();
+                mp.release();
+                mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_057);
+                mpp.start();
                 break;
             }
             case R.id.L2: {
@@ -138,8 +164,10 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 110, 540, 170);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
-                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_056);
-                mPlayer.start();
+                mpp.reset();
+                mp.release();
+                mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_056);
+                mpp.start();
                 break;
             }
             case R.id.L3: {
@@ -153,8 +181,10 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 140, 540, 200);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
-                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_054);
-                mPlayer.start();
+                mpp.reset();
+                mp.release();
+                mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_054);
+                mpp.start();
                 break;
             }
             case R.id.L4: {
@@ -168,8 +198,10 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 170, 540, 230);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
-                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_052);
-                mPlayer.start();
+                mpp.reset();
+                mp.release();
+                mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_052);
+                mpp.start();
                 break;
             }
             case R.id.L5: {
@@ -183,8 +215,10 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 200, 540, 260);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
-                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_051);
-                mPlayer.start();
+                mpp.reset();
+                mp.release();
+                mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_051);
+                mpp.start();
                 break;
             }
             case R.id.L6: {
@@ -198,8 +232,10 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 200, 540, 260);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
-                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_049);
-                mPlayer.start();
+                mpp.reset();
+                mp.release();
+                mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_049);
+                mpp.start();
                 break;
             }
             case R.id.L7: {
@@ -213,8 +249,10 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 200, 540, 260);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
-                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_047);
-                mPlayer.start();
+                mpp.reset();
+                mp.release();
+                mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_047);
+                mpp.start();
                 break;
             }
             case R.id.L8: {
@@ -228,8 +266,10 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 230, 540, 290);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
-                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_045);
-                mPlayer.start();
+                mpp.reset();
+                mp.release();
+                mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_045);
+                mpp.start();
                 break;
             }
             case R.id.L9: {
@@ -243,8 +283,10 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 260, 540, 320);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
-                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_044);
-                mPlayer.start();
+                mpp.reset();
+                mp.release();
+                mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_044);
+                mpp.start();
                 break;
             }
             case R.id.L10: {
@@ -258,8 +300,10 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 290, 540, 350);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
-                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_042);
-                mPlayer.start();
+                mpp.reset();
+                mp.release();
+                mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_042);
+                mpp.start();
                 break;
             }
             case R.id.L11: {
@@ -273,53 +317,312 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 RectF rect = new RectF(460, 320, 540, 380);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
-                MediaPlayer mPlayer = MediaPlayer.create(getContext(), R.raw.piano_ff_040);
-                mPlayer.start();
+                mpp.reset();
+                mp.release();
+                mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_040);
+                mpp.start();
                 break;
             }
             case R.id.record: {
-                Context context = getContext();
-                if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MIDI)) {
-                    MidiManager m = (MidiManager)context.getSystemService(Context.MIDI_SERVICE);
-                    MidiDeviceInfo[] infos = m.getDevices();
-                    final MidiDeviceInfo info = infos[0];
-                    m.openDevice(info, new MidiManager.OnDeviceOpenedListener() {
-                        @Override
-                        public void onDeviceOpened(MidiDevice device) {
-                            if (device == null) {
-                                Log.e(TAG, "could not open device " + info);
-                            } else {
-                                final int index = 0;
-                                MidiInputPort inputPort = device.openInputPort(index);
-                                byte[] buffer = new byte[32];
-                                int numBytes = 0;
-                                int channel = 3; // MIDI channels 1-16 are encoded as 0-15.
-                                buffer[numBytes++] = (byte)(0x90 + (channel - 1)); // note on
-                                buffer[numBytes++] = (byte)60; // pitch is middle C
-                                buffer[numBytes++] = (byte)127; // max velocity
-                                int offset = 0;
-                                // post is non-blocking
-                                try {
-                                    inputPort.send(buffer, offset, numBytes);
-                                    Toast.makeText(getContext(),"Hi",Toast.LENGTH_SHORT).show();
-                                    inputPort.flush();
-                                    inputPort.close();
-                                } catch (Exception e) {
-                                    Log.e(TAG, "Exception");
-                                    if (inputPort == null) Toast.makeText(getContext(),"AA", Toast.LENGTH_SHORT).show();
+                System.out.println("midifile begin ");
+                try {
+                    hah();
+                } catch(Exception e) {
 
-                                    Toast.makeText(getContext(),e.toString(), Toast.LENGTH_SHORT).show();
-
-                                }
-                            }
-                        }}, new Handler(Looper.getMainLooper())
-                    );
+                    Toast.makeText(getContext(), "Exception caught " + e.toString(),Toast.LENGTH_SHORT).show();
                 }
+/*
+                try
+                {
+//****  Create a new MIDI sequence with 24 ticks per beat  ****
+                    Sequence s = new Sequence(Sequence.PPQ,24);
+
+//****  Obtain a MIDI track from the sequence  ****
+                    Track t = s.createTrack();
+
+                    ShortMessage myMsg = new ShortMessage();
+                    // Play the note Middle C (60) moderately loud
+                    // (velocity = 93)on channel 4 (zero-based).
+                    myMsg.setMessage(ShortMessage.NOTE_ON, 4, 60, 93);
+
+                    MidiEvent md = new MidiEvent(myMsg, 0);
+                    t.add(md);
+
+
+//****  write the MIDI sequence to a MIDI file  ****
+                    Toast.makeText(getContext(),
+                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString(),
+                            Toast.LENGTH_SHORT).show();
+                    File f = new File(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_PICTURES), "mididi.mid");
+                    f.createNewFile();
+                    MidiSystem.write(s,1,f);
+
+                    Uri myUri = Uri.fromFile(f);
+                    MediaPlayer mediaPlayer = new MediaPlayer();
+                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                    mediaPlayer.setDataSource(getContext(), myUri);
+                    mediaPlayer.prepare();
+                    mediaPlayer.start();
+
+
+                } //try
+                catch(Exception e)
+                {
+                    Toast.makeText(getContext(), "Exception caught " + e.toString(),Toast.LENGTH_SHORT).show();
+                } //catch
+                System.out.println("midifile end ");
+
+
+                MediaPlayer mediaPlayer = MediaPlayer.create(getContext(), R.raw.midifile);
+                mediaPlayer.start(); // no need to call prepare(); create() does that for you
+                */
                 break;
             }
             default:
                 break;
         }
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_WRITE_EXTERNAL_FILE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    Toast.makeText(getContext(), "Write permission accessed", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    Toast.makeText(getContext(), "Write permission denied", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+   void hah()
+            throws MidiUnavailableException, InvalidMidiDataException, IOException
+    {
+        int instrument = 0;
+        int tempo = 120;
+        String filename = "hahah.midi";
+
+        // Parse the options
+        // -i <instrument number> default 0, a piano.  Allowed values: 0-127
+        // -t <beats per minute>  default tempo is 120 quarter notes per minute
+        // -o <filename>          save to a midi file instead of playing
+        int a = 0;
+                instrument = 0;
+                a+=2;
+
+                tempo = 120;
+                a+=2;
+
+
+
+
+        char[  ] notes = "A B C".toCharArray( );
+
+        // 16 ticks per quarter note.
+        Sequence sequence = new Sequence(Sequence.PPQ, 16);
+
+        // Add the specified notes to the track
+        addTrack(sequence, instrument, tempo, notes);
+// A file name was specified, so save the notes
+          ///  Toast.makeText(getContext(), "Exception caught ERETryty" ,Toast.LENGTH_SHORT).show();
+            int[  ] allowedTypes = MidiSystem.getMidiFileTypes(sequence);
+
+            if (allowedTypes.length == 0) {
+                Toast.makeText(getContext(), "No allowTypes" ,Toast.LENGTH_SHORT).show();
+                System.err.println("No supported MIDI file types.");
+            }
+            else {
+                if (ContextCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+                    // Should we show an explanation?
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                        Toast.makeText(getContext(),"Ask for Write permission", Toast.LENGTH_SHORT).show();
+
+                    } else {
+
+
+                        ActivityCompat.requestPermissions(getActivity(),
+                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                MY_PERMISSIONS_WRITE_EXTERNAL_FILE);
+
+                    }
+                }
+
+                while (ContextCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getContext(),"failpermission", Toast.LENGTH_SHORT).show();
+                }
+/*
+                    Toast.makeText(getContext(),
+                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).toString(),
+                            Toast.LENGTH_SHORT).show();
+*/
+                    File f = new File(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_MUSIC), "ajajf.mid");
+                    f.createNewFile();
+/*
+                    Toast.makeText(getContext(),
+                           Integer.toString(allowedTypes[0]),
+                            Toast.LENGTH_SHORT).show();
+*/
+                    MidiSystem.write(sequence, allowedTypes[0], f);
+
+
+                        Uri myUri = Uri.fromFile(f);
+
+
+    mp.reset();
+    mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+    mp.setDataSource(getContext(), myUri);
+    mp.prepare();
+    mp.start();
+             //      mediaPlayer.release();
+
+              //      f.delete();
+
+
+
+               // System.exit(0);
+            }
+    }
+    static final int[  ] offsets = {  // add these amounts to the base value
+            // A   B  C  D  E  F  G
+            -4, -2, 0, 1, 3, 5, 7
+    };
+
+    /*
+     * This method parses the specified char[  ] of notes into a Track.
+     * The musical notation is the following:
+     * A-G:   A named note; Add b for flat and # for sharp.
+     * +:     Move up one octave. Persists.
+     * -:     Move down one octave.  Persists.
+     * /1:    Notes are whole notes.  Persists 'till changed
+     * /2:    Half notes
+     * /4:    Quarter notes
+     * /n:    N can also be 8, 16, 32, 64.
+     * s:     Toggle sustain pedal on or off (initially off)
+     *
+     * >:     Louder.  Persists
+     * <:     Softer.  Persists
+     * .:     Rest. Length depends on current length setting
+     * Space: Play the previous note or notes; notes not separated by spaces
+     *        are played at the same time
+     */
+    public static void addTrack(Sequence s, int instrument, int tempo,
+                                char[  ] notes)
+            throws InvalidMidiDataException
+    {
+        Track track = s.createTrack( );  // Begin with a new track
+
+        // Set the instrument on channel 0
+        ShortMessage sm = new ShortMessage( );
+        sm.setMessage(ShortMessage.PROGRAM_CHANGE, 0, instrument, 0);
+        track.add(new MidiEvent(sm, 0));
+
+        int n = 0; // current character in notes[  ] array
+        int t = 0; // time in ticks for the composition
+
+        // These values persist and apply to all notes 'till changed
+        int notelength = 16; // default to quarter notes
+        int velocity = 64;   // default to middle volume
+        int basekey = 60;    // 60 is middle C. Adjusted up and down by octave
+        boolean sustain = false;   // is the sustain pedal depressed?
+        int numnotes = 0;    // How many notes in current chord?
+
+        while(n < notes.length) {
+            char c = notes[n++];
+
+            if (c == '+') basekey += 12;        // increase octave
+            else if (c == '-') basekey -= 12;   // decrease octave
+            else if (c == '>') velocity += 16;  // increase volume;
+            else if (c == '<') velocity -= 16;  // decrease volume;
+            else if (c == '/') {
+                char d = notes[n++];
+                if (d == '2') notelength = 32;  // half note
+                else if (d == '4') notelength = 16;  // quarter note
+                else if (d == '8') notelength = 8;   // eighth note
+                else if (d == '3' && notes[n++] == '2') notelength = 2;
+                else if (d == '6' && notes[n++] == '4') notelength = 1;
+                else if (d == '1') {
+                    if (n < notes.length && notes[n] == '6')
+                        notelength = 4;    // 1/16th note
+                    else notelength = 64;  // whole note
+                }
+            }
+            else if (c == 's') {
+                sustain = !sustain;
+                // Change the sustain setting for channel 0
+                ShortMessage m = new ShortMessage( );
+                m.setMessage(ShortMessage.CONTROL_CHANGE, 0,
+                        DAMPER_PEDAL, sustain?DAMPER_ON:DAMPER_OFF);
+                track.add(new MidiEvent(m, t));
+            }
+            else if (c >= 'A' && c <= 'G') {
+                int key = basekey + offsets[c - 'A'];
+                if (n < notes.length) {
+                    if (notes[n] == 'b') { // flat
+                        key--;
+                        n++;
+                    }
+                    else if (notes[n] == '#') { // sharp
+                        key++;
+                        n++;
+                    }
+                }
+
+                addNote(track, t, notelength, key, velocity);
+                numnotes++;
+            }
+            else if (c == ' ') {
+                // Spaces separate groups of notes played at the same time.
+                // But we ignore them unless they follow a note or notes.
+                if (numnotes > 0) {
+                    t += notelength;
+                    numnotes = 0;
+                }
+            }
+            else if (c == '.') {
+                // Rests are like spaces in that they force any previous
+                // note to be output (since they are never part of chords)
+                if (numnotes > 0) {
+                    t += notelength;
+                    numnotes = 0;
+                }
+                // Now add additional rest time
+                t += notelength;
+            }
+        }
+    }
+
+    // A convenience method to add a note to the track on channel 0
+    public static void addNote(Track track, int startTick,
+                               int tickLength, int key, int velocity)
+            throws InvalidMidiDataException
+    {
+        ShortMessage on = new ShortMessage( );
+        on.setMessage(ShortMessage.NOTE_ON,  0, key, velocity);
+        ShortMessage off = new ShortMessage( );
+        off.setMessage(ShortMessage.NOTE_OFF, 0, key, velocity);
+        track.add(new MidiEvent(on, startTick));
+        track.add(new MidiEvent(off, startTick + tickLength));
+    }
+
+
 }
 
