@@ -13,13 +13,13 @@ import android.widget.Toast;
  * Created by yhxle on 10/30/2017.
  */
 
-public class QuizFragment extends Fragment implements View.OnClickListener {
-    public static final String TAG = "QuizFragment";
+public class PlayPhotoFragment extends Fragment implements View.OnClickListener {
+    public static final String TAG = "PlayPhotoFragment";
 
-    public QuizFragment() { super(); }
+    public PlayPhotoFragment() { super(); }
 
-    public static QuizFragment newInstance() {
-        QuizFragment fragment = new QuizFragment();
+    public static PlayPhotoFragment newInstance() {
+        PlayPhotoFragment fragment = new PlayPhotoFragment();
         return fragment;
     }
 

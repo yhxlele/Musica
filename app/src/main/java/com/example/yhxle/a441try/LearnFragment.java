@@ -49,17 +49,295 @@ import jp.kshoji.javax.sound.midi.*;
 public class LearnFragment extends Fragment implements View.OnClickListener {
 
 
-    public static final String TAG = "LoginFragment";
+    public static final String TAG = "LearnFragment";
     public static final int MY_PERMISSIONS_READ_EXTERNAL_FILE = 0;
     public static final int MY_PERMISSIONS_WRITE_EXTERNAL_FILE = 1;
     public static final int DAMPER_PEDAL = 64;
     public static final int DAMPER_ON = 127;
     public static final int DAMPER_OFF = 0;
     public static final int END_OF_TRACK = 47;
+    public static final int C4 = 60;
+    public static final int D4 = 62;
+    public static final int E4 = 64;
+    public static final int F4 = 65;
+    public static final int G4 = 67;
+    public static final int A4 = 69;
+    public static final int B4 = 70;
+    public static final int C5 = 72;
+    public static final int D5 = 74;
+    public static final int E5 = 76;
+    public static final int F5 = 77;
     public static final MediaPlayer mp = new MediaPlayer();
 
     public static MediaPlayer mpp = new MediaPlayer();
+    
+    
+        public static final int NOTE_ON = 0x90;
+        public static final int NOTE_OFF = 0x80;
+        public static final String[] NOTE_NAMES = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
 
+
+        public void MyRead(View v, File file) throws Exception {
+
+
+                    Sequence sequence = MidiSystem.getSequence(file);
+
+                    int trackNumber = 0;
+
+                    for (Track track : sequence.getTracks())
+
+                    {
+                        trackNumber++;
+                        Log.e(TAG, "Track " + trackNumber + ": size = " + track.size());
+                        for (int i = 0; i < track.size(); i++) {
+                            MidiEvent event = track.get(i);
+                            Log.e(TAG, "@" + event.getTick() + " ");
+                            MidiMessage message = event.getMessage();
+                            if (message instanceof ShortMessage) {
+                                ShortMessage sm = (ShortMessage) message;
+                                Log.e(TAG, "Channel: " + sm.getChannel() + " ");
+                                if (sm.getCommand() == NOTE_ON) {
+                                    int key = sm.getData1();
+                                    int octave = (key / 12) - 1;
+                                    int note = key % 12;
+                                    String noteName = NOTE_NAMES[note];
+                                    int velocity = sm.getData2();
+                                    Log.e(TAG, "Note on, " + noteName + octave + " key=" + key + " velocity: " + velocity);
+                                    TextView textView = (TextView) v.getRootView().findViewById(R.id.show);
+                                    final ImageView note_imageview = (ImageView) v.getRootView().findViewById(R.id.note);
+                                    switch (key) {
+                                        case C4: {
+                                            textView.setText("Middle C");
+                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
+                                            Paint paint_oval = new Paint();
+                                            paint_oval.setAntiAlias(true);
+                                            paint_oval.setColor(Color.BLACK);
+                                            Canvas c_oval = new Canvas(bmp_oval);
+                                            c_oval.drawRect(530, 140, 540, 350, paint_oval);
+                                            RectF rect = new RectF(460, 320, 540, 380);
+                                            c_oval.drawOval(rect, paint_oval);
+                                            //note_imageview.setImageBitmap(bmp_oval);
+                                            note_imageview.postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                }
+                                            }, event.getTick()*500/16);
+                                            break;
+                                        }
+                                        case D4: {
+                                            textView.setText("Middle D");
+                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
+                                            Paint paint_oval = new Paint();
+                                            paint_oval.setAntiAlias(true);
+                                            paint_oval.setColor(Color.BLACK);
+                                            Canvas c_oval = new Canvas(bmp_oval);
+                                            c_oval.drawRect(530, 110, 540, 320, paint_oval);
+                                            RectF rect = new RectF(460, 290, 540, 350);
+                                            c_oval.drawOval(rect, paint_oval);
+                                            //note_imageview.setImageBitmap(bmp_oval);
+                                            note_imageview.postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                }
+                                            },event.getTick()*500/16);
+                                            break;
+                                        }
+                                        case E4: {
+                                            textView.setText("Middle E");
+                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
+                                            Paint paint_oval = new Paint();
+                                            paint_oval.setAntiAlias(true);
+                                            paint_oval.setColor(Color.BLACK);
+                                            Canvas c_oval = new Canvas(bmp_oval);
+                                            c_oval.drawRect(530, 80, 540, 290, paint_oval);
+                                            RectF rect = new RectF(460, 260, 540, 320);
+                                            c_oval.drawOval(rect, paint_oval);
+                                            //note_imageview.setImageBitmap(bmp_oval);
+                                            note_imageview.postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                }
+                                            }, event.getTick()*500/16);
+                                            break;
+                                        }
+                                        case F4: {
+                                            textView.setText("Middle F");
+                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
+                                            Paint paint_oval = new Paint();
+                                            paint_oval.setAntiAlias(true);
+                                            paint_oval.setColor(Color.BLACK);
+                                            Canvas c_oval = new Canvas(bmp_oval);
+                                            c_oval.drawRect(530, 50, 540, 260, paint_oval);
+                                            RectF rect = new RectF(460, 230, 540, 290);
+                                            c_oval.drawOval(rect, paint_oval);
+                                            //note_imageview.setImageBitmap(bmp_oval);
+                                            note_imageview.postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                }
+                                            }, event.getTick()*500/16);
+                                            break;
+                                        }
+                                        case G4: {
+                                            textView.setText("Middle G");
+                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
+                                            Paint paint_oval = new Paint();
+                                            paint_oval.setAntiAlias(true);
+                                            paint_oval.setColor(Color.BLACK);
+                                            Canvas c_oval = new Canvas(bmp_oval);
+                                            c_oval.drawRect(530, 20, 540, 230, paint_oval);
+                                            RectF rect = new RectF(460, 200, 540, 260);
+                                            c_oval.drawOval(rect, paint_oval);
+                                            //note_imageview.setImageBitmap(bmp_oval);
+                                            note_imageview.postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                }
+                                            }, event.getTick()*500/16);
+                                            break;
+                                        }
+                                        case A4: {
+                                            textView.setText("Middle A");
+                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 460, Bitmap.Config.ARGB_8888);
+                                            Paint paint_oval = new Paint();
+                                            paint_oval.setAntiAlias(true);
+                                            paint_oval.setColor(Color.BLACK);
+                                            Canvas c_oval = new Canvas(bmp_oval);
+                                            c_oval.drawRect(530, 20, 540, 230, paint_oval);
+                                            RectF rect = new RectF(460, 200, 540, 260);
+                                            c_oval.drawOval(rect, paint_oval);
+                                            //note_imageview.setImageBitmap(bmp_oval);
+                                            note_imageview.postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                }
+                                            }, event.getTick()*500/16);
+                                            break;
+                                        }
+                                        case B4: {
+                                            textView.setText("Middle B");
+                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
+                                            Paint paint_oval = new Paint();
+                                            paint_oval.setAntiAlias(true);
+                                            paint_oval.setColor(Color.BLACK);
+                                            Canvas c_oval = new Canvas(bmp_oval);
+                                            c_oval.drawRect(530, 20, 540, 230, paint_oval);
+                                            RectF rect = new RectF(460, 200, 540, 260);
+                                            c_oval.drawOval(rect, paint_oval);
+                                            //note_imageview.setImageBitmap(bmp_oval);
+                                            note_imageview.postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                }
+                                            }, event.getTick()*500/16);
+                                            break;
+                                        }
+                                        case C5: {
+                                            textView.setText("High C");
+                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
+                                            Paint paint_oval = new Paint();
+                                            paint_oval.setAntiAlias(true);
+                                            paint_oval.setColor(Color.BLACK);
+                                            Canvas c_oval = new Canvas(bmp_oval);
+                                            c_oval.drawRect(460, 200, 470, 410, paint_oval);
+                                            RectF rect = new RectF(460, 170, 540, 230);
+                                            c_oval.drawOval(rect, paint_oval);
+                                            //note_imageview.setImageBitmap(bmp_oval);
+                                            note_imageview.postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                }
+                                            }, event.getTick()*500/16);
+                                            break;
+                                        }
+                                        case D5: {
+                                            textView.setText("High D");
+                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
+                                            Paint paint_oval = new Paint();
+                                            paint_oval.setAntiAlias(true);
+                                            paint_oval.setColor(Color.BLACK);
+                                            Canvas c_oval = new Canvas(bmp_oval);
+                                            c_oval.drawRect(460, 170, 470, 380, paint_oval);
+                                            RectF rect = new RectF(460, 140, 540, 200);
+                                            c_oval.drawOval(rect, paint_oval);
+                                            //note_imageview.setImageBitmap(bmp_oval);
+                                            note_imageview.postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                }
+                                            }, event.getTick()*500/16);
+                                            break;
+                                        }
+                                        case E5: {
+                                            textView.setText("High E");
+                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
+                                            Paint paint_oval = new Paint();
+                                            paint_oval.setAntiAlias(true);
+                                            paint_oval.setColor(Color.BLACK);
+                                            Canvas c_oval = new Canvas(bmp_oval);
+                                            c_oval.drawRect(460, 140, 470, 350, paint_oval);
+                                            RectF rect = new RectF(460, 110, 540, 170);
+                                            c_oval.drawOval(rect, paint_oval);
+                                            //note_imageview.setImageBitmap(bmp_oval);
+                                            note_imageview.postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                }
+                                            }, event.getTick()*500/16);
+                                            break;
+                                        }
+                                        case F5: {
+                                            textView.setText("High F");
+                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
+                                            Paint paint_oval = new Paint();
+                                            paint_oval.setAntiAlias(true);
+                                            paint_oval.setColor(Color.BLACK);
+                                            Canvas c_oval = new Canvas(bmp_oval);
+                                            c_oval.drawRect(460, 110, 470, 320, paint_oval);
+                                            RectF rect = new RectF(460, 80, 540, 140);
+                                            c_oval.drawOval(rect, paint_oval);
+                                            //note_imageview.setImageBitmap(bmp_oval);
+                                            note_imageview.postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                }
+                                            }, event.getTick()*500/16);
+                                            break;
+                                        }
+                                        default:
+                                            break;
+                                    }
+                                } else if (sm.getCommand() == NOTE_OFF) {
+                                    int key = sm.getData1();
+                                    int octave = (key / 12) - 1;
+                                    int note = key % 12;
+                                    String noteName = NOTE_NAMES[note];
+                                    int velocity = sm.getData2();
+                                    Log.e(TAG, "Note off, " + noteName + octave + " key=" + key + " velocity: " + velocity);
+                                } else {
+                                    Log.e(TAG, "Command:" + sm.getCommand());
+                                }
+                            } else {
+                                Log.e(TAG, "Other message: " + message.getClass());
+                            }
+                        }
+
+                    }
+
+        }
+        
+        
     public LearnFragment() { super(); }
 
     public static LearnFragment newInstance() {
@@ -148,7 +426,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
                 mpp.reset();
-                mp.release();
+                mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_057);
                 mpp.start();
                 break;
@@ -165,7 +443,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
                 mpp.reset();
-                mp.release();
+                mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_056);
                 mpp.start();
                 break;
@@ -182,7 +460,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
                 mpp.reset();
-                mp.release();
+                mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_054);
                 mpp.start();
                 break;
@@ -199,7 +477,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
                 mpp.reset();
-                mp.release();
+                mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_052);
                 mpp.start();
                 break;
@@ -216,7 +494,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
                 mpp.reset();
-                mp.release();
+                mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_051);
                 mpp.start();
                 break;
@@ -233,7 +511,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
                 mpp.reset();
-                mp.release();
+                mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_049);
                 mpp.start();
                 break;
@@ -250,7 +528,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
                 mpp.reset();
-                mp.release();
+                mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_047);
                 mpp.start();
                 break;
@@ -267,7 +545,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
                 mpp.reset();
-                mp.release();
+                mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_045);
                 mpp.start();
                 break;
@@ -284,7 +562,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
                 mpp.reset();
-                mp.release();
+                mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_044);
                 mpp.start();
                 break;
@@ -301,7 +579,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
                 mpp.reset();
-                mp.release();
+                mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_042);
                 mpp.start();
                 break;
@@ -318,15 +596,108 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
                 mpp.reset();
-                mp.release();
+                mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_040);
                 mpp.start();
                 break;
             }
             case R.id.record: {
-                System.out.println("midifile begin ");
+                Log.e(TAG,"midifile begin ");
                 try {
-                    hah();
+                    int instrument = 0;
+                    int tempo = 120;
+                    String filename = "hahah.midi";
+
+                    // Parse the options
+                    // -i <instrument number> default 0, a piano.  Allowed values: 0-127
+                    // -t <beats per minute>  default tempo is 120 quarter notes per minute
+                    // -o <filename>          save to a midi file instead of playing
+                    int a = 0;
+                    instrument = 0;
+                    a+=2;
+
+                    tempo = 120;
+                    a+=2;
+
+
+
+
+                    char[  ] notes = "C C G G + A# A# - G/2 F F E# E# D# D# C".toCharArray( );
+
+                    // 16 ticks per quarter note.
+                    Sequence sequence = new Sequence(Sequence.PPQ, 16);
+
+                    // Add the specified notes to the track
+                    addTrack(sequence, instrument, tempo, notes);
+// A file name was specified, so save the notes
+                    ///  Toast.makeText(getContext(), "Exception caught ERETryty" ,Toast.LENGTH_SHORT).show();
+                    int[  ] allowedTypes = MidiSystem.getMidiFileTypes(sequence);
+
+                    if (allowedTypes.length == 0) {
+                        Toast.makeText(getContext(), "No allowTypes" ,Toast.LENGTH_SHORT).show();
+                        System.err.println("No supported MIDI file types.");
+                    }
+                    else {
+                        if (ContextCompat.checkSelfPermission(getActivity(),
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                != PackageManager.PERMISSION_GRANTED) {
+
+                            // Should we show an explanation?
+                            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                                Toast.makeText(getContext(),"Ask for Write permission", Toast.LENGTH_SHORT).show();
+
+                            } else {
+
+
+                                ActivityCompat.requestPermissions(getActivity(),
+                                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                        MY_PERMISSIONS_WRITE_EXTERNAL_FILE);
+
+                            }
+                        }
+
+                        while (ContextCompat.checkSelfPermission(getActivity(),
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                != PackageManager.PERMISSION_GRANTED) {
+                            Toast.makeText(getContext(),"failpermission", Toast.LENGTH_SHORT).show();
+                        }
+/*
+                    Toast.makeText(getContext(),
+                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).toString(),
+                            Toast.LENGTH_SHORT).show();
+*/
+                        File f = new File(Environment.getExternalStoragePublicDirectory(
+                                Environment.DIRECTORY_MUSIC), "ajajf.mid");
+                        f.createNewFile();
+/*
+                    Toast.makeText(getContext(),
+                           Integer.toString(allowedTypes[0]),
+                            Toast.LENGTH_SHORT).show();
+*/
+                        MidiSystem.write(sequence, allowedTypes[0], f);
+
+
+                        Uri myUri = Uri.fromFile(f);
+
+
+                        mp.reset();
+                        mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                        mp.setDataSource(getContext(), myUri);
+                        mp.prepare();
+                        mp.start();
+                        //      mediaPlayer.release();
+
+                        //      f.delete();
+                        try {
+                            MyRead(v, f);
+                        } catch (Exception e) {
+                            Log.e(TAG, e.toString());
+                        }
+
+                        // System.exit(0);
+                    }
                 } catch(Exception e) {
 
                     Toast.makeText(getContext(), "Exception caught " + e.toString(),Toast.LENGTH_SHORT).show();
@@ -371,7 +742,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 {
                     Toast.makeText(getContext(), "Exception caught " + e.toString(),Toast.LENGTH_SHORT).show();
                 } //catch
-                System.out.println("midifile end ");
+                Log.e(TAG,ln("midifile end ");
 
 
                 MediaPlayer mediaPlayer = MediaPlayer.create(getContext(), R.raw.midifile);
@@ -406,101 +777,6 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-   void hah()
-            throws MidiUnavailableException, InvalidMidiDataException, IOException
-    {
-        int instrument = 0;
-        int tempo = 120;
-        String filename = "hahah.midi";
-
-        // Parse the options
-        // -i <instrument number> default 0, a piano.  Allowed values: 0-127
-        // -t <beats per minute>  default tempo is 120 quarter notes per minute
-        // -o <filename>          save to a midi file instead of playing
-        int a = 0;
-                instrument = 0;
-                a+=2;
-
-                tempo = 120;
-                a+=2;
-
-
-
-
-        char[  ] notes = "A B C".toCharArray( );
-
-        // 16 ticks per quarter note.
-        Sequence sequence = new Sequence(Sequence.PPQ, 16);
-
-        // Add the specified notes to the track
-        addTrack(sequence, instrument, tempo, notes);
-// A file name was specified, so save the notes
-          ///  Toast.makeText(getContext(), "Exception caught ERETryty" ,Toast.LENGTH_SHORT).show();
-            int[  ] allowedTypes = MidiSystem.getMidiFileTypes(sequence);
-
-            if (allowedTypes.length == 0) {
-                Toast.makeText(getContext(), "No allowTypes" ,Toast.LENGTH_SHORT).show();
-                System.err.println("No supported MIDI file types.");
-            }
-            else {
-                if (ContextCompat.checkSelfPermission(getActivity(),
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) {
-
-                    // Should we show an explanation?
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-                        Toast.makeText(getContext(),"Ask for Write permission", Toast.LENGTH_SHORT).show();
-
-                    } else {
-
-
-                        ActivityCompat.requestPermissions(getActivity(),
-                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                MY_PERMISSIONS_WRITE_EXTERNAL_FILE);
-
-                    }
-                }
-
-                while (ContextCompat.checkSelfPermission(getActivity(),
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getContext(),"failpermission", Toast.LENGTH_SHORT).show();
-                }
-/*
-                    Toast.makeText(getContext(),
-                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).toString(),
-                            Toast.LENGTH_SHORT).show();
-*/
-                    File f = new File(Environment.getExternalStoragePublicDirectory(
-                            Environment.DIRECTORY_MUSIC), "ajajf.mid");
-                    f.createNewFile();
-/*
-                    Toast.makeText(getContext(),
-                           Integer.toString(allowedTypes[0]),
-                            Toast.LENGTH_SHORT).show();
-*/
-                    MidiSystem.write(sequence, allowedTypes[0], f);
-
-
-                        Uri myUri = Uri.fromFile(f);
-
-
-    mp.reset();
-    mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
-    mp.setDataSource(getContext(), myUri);
-    mp.prepare();
-    mp.start();
-             //      mediaPlayer.release();
-
-              //      f.delete();
-
-
-
-               // System.exit(0);
-            }
-    }
     static final int[  ] offsets = {  // add these amounts to the base value
             // A   B  C  D  E  F  G
             -4, -2, 0, 1, 3, 5, 7

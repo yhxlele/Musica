@@ -12,20 +12,20 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class LearnActivity extends AppCompatActivity {
+public class PlayActivity extends AppCompatActivity {
 
     private ArrayList<String> tab_array;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_learn);
+        setContentView(R.layout.activity_play);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         tab_array = new ArrayList<>();
-        tab_array.add("Learning");
-        tab_array.add("Quiz");
+        tab_array.add("Midi");
+        tab_array.add("Photo");
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText(tab_array.get(0)));
@@ -33,9 +33,9 @@ public class LearnActivity extends AppCompatActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-        LearnFragmentPageAdapter learnFragmentPageAdapter = new LearnFragmentPageAdapter(getSupportFragmentManager());
-        learnFragmentPageAdapter.setTabs(tab_array);
-        viewPager.setAdapter(learnFragmentPageAdapter);
+        PlayFragmentPageAdapter playFragmentPageAdapter = new PlayFragmentPageAdapter(getSupportFragmentManager());
+        playFragmentPageAdapter.setTabs(tab_array);
+        viewPager.setAdapter(playFragmentPageAdapter);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -59,7 +59,7 @@ public class LearnActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_learn, menu);
+        getMenuInflater().inflate(R.menu.menu_play, menu);
         return true;
     }
 

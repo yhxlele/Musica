@@ -29,6 +29,11 @@
             android:name=".LearnActivity"
             android:label="@string/learn_page"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PlayActivity"
+            android:label="@string/play_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>
