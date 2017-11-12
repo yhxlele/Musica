@@ -15,6 +15,7 @@ import android.media.MediaPlayer;
 import android.media.SoundPool;
 // import android.media.midi.*;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -38,10 +39,15 @@ import com.larvalabs.svgandroid.SVGParser;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.util.Vector;
 import java.util.concurrent.Exchanger;
-
+import android.database.Cursor;
 import jp.kshoji.javax.sound.midi.*;
+
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by yhxle on 10/30/2017.
  */
@@ -70,17 +76,83 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
     public static final MediaPlayer mp = new MediaPlayer();
 
     public static MediaPlayer mpp = new MediaPlayer();
-    
-    
-        public static final int NOTE_ON = 0x90;
+    private Uri myUri = null;
+    private View myView;
+
+    private static final int FILE_SELECT_CODE = 0;
+
+    private void showFileChooser() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("*/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        try {
+            startActivityForResult(
+                    Intent.createChooser(intent, "Select a File to Upload"),
+                    FILE_SELECT_CODE);
+        } catch (android.content.ActivityNotFoundException ex) {
+            // Potentially direct the user to the Market with a Dialog
+            Toast.makeText(getContext(), "Please install a File Manager.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case FILE_SELECT_CODE:
+                if (resultCode == RESULT_OK) {
+                    // Get the Uri of the selected file
+                    Uri uri = data.getData();
+                    Log.d(TAG, "File Uri: " + uri.toString());
+                    myUri = uri;
+                    HandleFile();
+                    // Get the path
+                    try {
+                        String path = getPath(getContext(), uri);
+                        Log.d(TAG, "File Path: " + path);
+                    } catch (Exception e) {
+                        Log.e(TAG, e.toString());
+                    }
+                    // Get the file instance
+                    // File file = new File(path);
+                    // Initiate the upload
+                }
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public static String getPath(Context context, Uri uri) throws URISyntaxException {
+        if ("content".equalsIgnoreCase(uri.getScheme())) {
+            String[] projection = { "_data" };
+            Cursor cursor = null;
+
+            try {
+                cursor = context.getContentResolver().query(uri, projection, null, null, null);
+                int column_index = cursor.getColumnIndexOrThrow("_data");
+                if (cursor.moveToFirst()) {
+                    return cursor.getString(column_index);
+                }
+            } catch (Exception e) {
+                // Eat it
+            }
+        }
+        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            return uri.getPath();
+        }
+
+        return null;
+    }
+
+    public static final int NOTE_ON = 0x90;
         public static final int NOTE_OFF = 0x80;
         public static final String[] NOTE_NAMES = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
 
 
-        public void MyRead(View v, File file) throws Exception {
+        public void MyRead(InputStream inputStream) throws Exception {
 
 
-                    Sequence sequence = MidiSystem.getSequence(file);
+                    Sequence sequence = MidiSystem.getSequence(inputStream);
 
                     int trackNumber = 0;
 
@@ -103,8 +175,8 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                                     String noteName = NOTE_NAMES[note];
                                     int velocity = sm.getData2();
                                     Log.e(TAG, "Note on, " + noteName + octave + " key=" + key + " velocity: " + velocity);
-                                    TextView textView = (TextView) v.getRootView().findViewById(R.id.show);
-                                    final ImageView note_imageview = (ImageView) v.getRootView().findViewById(R.id.note);
+                                    TextView textView = (TextView) myView.findViewById(R.id.show);
+                                    final ImageView note_imageview = (ImageView) myView.findViewById(R.id.note);
                                     switch (key) {
                                         case C4: {
                                             textView.setText("Middle C");
@@ -356,6 +428,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_learn, container, false);
+        myView = view;
         Bitmap bmp = Bitmap.createBitmap(1000, 100,  Bitmap.Config.ARGB_8888);
         Paint paint = new Paint();
         paint.setAntiAlias(true);
@@ -410,7 +483,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
 
     @TargetApi(23)
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
         TextView textView = (TextView) v.getRootView().findViewById(R.id.show);
         ImageView note_imageview  = (ImageView) v.getRootView().findViewById (R.id.note);
         switch (v.getId()) {
@@ -678,25 +751,10 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
 */
                         MidiSystem.write(sequence, allowedTypes[0], f);
 
+                        showFileChooser();
 
-                        Uri myUri = Uri.fromFile(f);
 
 
-                        mp.reset();
-                        mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                        mp.setDataSource(getContext(), myUri);
-                        mp.prepare();
-                        mp.start();
-                        //      mediaPlayer.release();
-
-                        //      f.delete();
-                        try {
-                            MyRead(v, f);
-                        } catch (Exception e) {
-                            Log.e(TAG, e.toString());
-                        }
-
-                        // System.exit(0);
                     }
                 } catch(Exception e) {
 
@@ -752,6 +810,24 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
             }
             default:
                 break;
+        }
+    }
+    public void HandleFile (){
+        try {
+            // Uri myUri = Uri.fromFile(f);
+            mp.reset();
+            mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mp.setDataSource(getContext(), myUri);
+            mp.prepare();
+            mp.start();
+            //      mediaPlayer.release();
+
+            //      f.delete();
+            InputStream inputStream = getContext().getContentResolver().openInputStream(myUri);
+            MyRead(inputStream);
+            inputStream.close();
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
         }
     }
     @Override

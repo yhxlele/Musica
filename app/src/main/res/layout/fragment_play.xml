@@ -88,6 +88,6 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Record" />
+            android:text="Select Midi File" />
     </LinearLayout>
 </LinearLayout>
