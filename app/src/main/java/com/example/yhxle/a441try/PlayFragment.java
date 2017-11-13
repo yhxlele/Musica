@@ -69,7 +69,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
     public static final int F4 = 65;
     public static final int G4 = 67;
     public static final int A4 = 69;
-    public static final int B4 = 70;
+    public static final int B4 = 71;
     public static final int C5 = 72;
     public static final int D5 = 74;
     public static final int E5 = 76;
@@ -740,7 +740,6 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                 try {
                     int instrument = 0;
                     int tempo = 120;
-                    String filename = "hahah.midi";
 
                     // Parse the options
                     // -i <instrument number> default 0, a piano.  Allowed values: 0-127
@@ -756,7 +755,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
 
 
 
-                    char[  ] notes = "C C G G + A# A# - G/2 F F E# E# D# D# C".toCharArray( );
+                    char[  ] notes = "/2E /4G + /kD /2C - /4G /kF /2E /4E E F G /kA G /2E /4G + /kD /2C - /4G /kF /2E /4G G A B + /kC C /8D . . - G /4G B A G /2E /4G + /kC - /2A + /4C /2D /4C - /kB G /2E /4G + /kD /2C - /4G /kF /2E /4G G A B + /kC C".toCharArray( );
 
                     // 16 ticks per quarter note.
                     Sequence sequence = new Sequence(Sequence.PPQ, 16);
@@ -764,8 +763,12 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                     // Add the specified notes to the track
                     addTrack(sequence, instrument, tempo, notes);
 // A file name was specified, so save the notes
-                    ///  Toast.makeText(getContext(), "Exception caught ERETryty" ,Toast.LENGTH_SHORT).show();
                     int[  ] allowedTypes = MidiSystem.getMidiFileTypes(sequence);
+                    File f = new File(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_MUSIC), "Edelweiss.mid");
+                    f.createNewFile();
+
+                    MidiSystem.write(sequence, allowedTypes[0], f);
 
 
                         if (ContextCompat.checkSelfPermission(getActivity(),
@@ -786,29 +789,14 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                         MY_PERMISSIONS_READ_EXTERNAL_FILE);
 
                             }
+                        } else {
+                            showFileChooser();
+
                         }
 
-                        while (ContextCompat.checkSelfPermission(getActivity(),
-                                Manifest.permission.READ_EXTERNAL_STORAGE)
-                                != PackageManager.PERMISSION_GRANTED) {
-                            Toast.makeText(getContext(),"failpermission", Toast.LENGTH_SHORT).show();
-                        }
-/*
-                    Toast.makeText(getContext(),
-                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).toString(),
-                            Toast.LENGTH_SHORT).show();
-*/
-                        File f = new File(Environment.getExternalStoragePublicDirectory(
-                                Environment.DIRECTORY_MUSIC), "ajajf.mid");
-                        f.createNewFile();
-/*
-                    Toast.makeText(getContext(),
-                           Integer.toString(allowedTypes[0]),
-                            Toast.LENGTH_SHORT).show();
-*/
-                        MidiSystem.write(sequence, allowedTypes[0], f);
 
-                                showFileChooser();
+
+
 
 
 
@@ -897,10 +885,12 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     Toast.makeText(getContext(), "Read permission accessed", Toast.LENGTH_SHORT).show();
+                    showFileChooser();
 
                 } else {
 
                     Toast.makeText(getContext(), "Read permission denied", Toast.LENGTH_SHORT).show();
+
                 }
                 return;
             }
@@ -912,7 +902,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
 
     static final int[  ] offsets = {  // add these amounts to the base value
             // A   B  C  D  E  F  G
-            -4, -2, 0, 1, 3, 5, 7
+               9, 11, 0, 2, 4, 5, 7
     };
 
     /*
@@ -964,6 +954,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
             else if (c == '/') {
                 char d = notes[n++];
                 if (d == '2') notelength = 32;  // half note
+                else if (d == 'k') notelength = 48;
                 else if (d == '4') notelength = 16;  // quarter note
                 else if (d == '8') notelength = 8;   // eighth note
                 else if (d == '3' && notes[n++] == '2') notelength = 2;
