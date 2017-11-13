@@ -180,12 +180,16 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                                     switch (key) {
                                         case C4: {
                                             textView.setText("Middle C");
+
+
+
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
                                             paint_oval.setColor(Color.BLACK);
                                             Canvas c_oval = new Canvas(bmp_oval);
                                             c_oval.drawRect(530, 140, 540, 350, paint_oval);
+                                            c_oval.drawRect(430, 345, 570, 355, paint_oval);
                                             RectF rect = new RectF(460, 320, 540, 380);
                                             c_oval.drawOval(rect, paint_oval);
                                             //note_imageview.setImageBitmap(bmp_oval);
@@ -439,7 +443,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
         Bitmap bmp_g = Bitmap.createBitmap(1000, 100,  Bitmap.Config.ARGB_8888);
         Paint paint_g = new Paint();
         paint_g.setAntiAlias(true);
-        paint_g.setColor(Color.GRAY);
+        paint_g.setColor(Color.TRANSPARENT);
         Canvas c_g = new Canvas(bmp_g);
         c_g.drawRect(0,45,1000,55, paint_g);
 
@@ -471,8 +475,8 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
         ImageButton l11 = (ImageButton) view.findViewById(R.id.L11);
         l11.setOnClickListener(this);
         l11.setImageBitmap(bmp_g);
-        Button record = (Button) view.findViewById(R.id.record);
-        record.setOnClickListener(this);
+        //Button record = (Button) view.findViewById(R.id.record);
+        //record.setOnClickListener(this);
         SVG svg;
         svg = SVGParser.getSVGFromResource (getResources (), R.raw.light_treble_clef);
         ImageView clef_imageview  = (ImageView) view.findViewById (R.id.clef);
@@ -665,6 +669,8 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 paint_oval.setColor(Color.BLACK);
                 Canvas c_oval = new Canvas(bmp_oval);
                 c_oval.drawRect(530, 140, 540, 350, paint_oval);
+                c_oval.drawRect(430, 345, 570, 355, paint_oval);
+
                 RectF rect = new RectF(460, 320, 540, 380);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
@@ -674,6 +680,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 mpp.start();
                 break;
             }
+            /*
             case R.id.record: {
                 Log.e(TAG,"midifile begin ");
                 try {
@@ -736,19 +743,11 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                                 != PackageManager.PERMISSION_GRANTED) {
                             Toast.makeText(getContext(),"failpermission", Toast.LENGTH_SHORT).show();
                         }
-/*
-                    Toast.makeText(getContext(),
-                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).toString(),
-                            Toast.LENGTH_SHORT).show();
-*/
+
                         File f = new File(Environment.getExternalStoragePublicDirectory(
                                 Environment.DIRECTORY_MUSIC), "ajajf.mid");
                         f.createNewFile();
-/*
-                    Toast.makeText(getContext(),
-                           Integer.toString(allowedTypes[0]),
-                            Toast.LENGTH_SHORT).show();
-*/
+
                         MidiSystem.write(sequence, allowedTypes[0], f);
 
                         showFileChooser();
@@ -760,54 +759,10 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
 
                     Toast.makeText(getContext(), "Exception caught " + e.toString(),Toast.LENGTH_SHORT).show();
                 }
-/*
-                try
-                {
-//****  Create a new MIDI sequence with 24 ticks per beat  ****
-                    Sequence s = new Sequence(Sequence.PPQ,24);
 
-//****  Obtain a MIDI track from the sequence  ****
-                    Track t = s.createTrack();
-
-                    ShortMessage myMsg = new ShortMessage();
-                    // Play the note Middle C (60) moderately loud
-                    // (velocity = 93)on channel 4 (zero-based).
-                    myMsg.setMessage(ShortMessage.NOTE_ON, 4, 60, 93);
-
-                    MidiEvent md = new MidiEvent(myMsg, 0);
-                    t.add(md);
-
-
-//****  write the MIDI sequence to a MIDI file  ****
-                    Toast.makeText(getContext(),
-                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString(),
-                            Toast.LENGTH_SHORT).show();
-                    File f = new File(Environment.getExternalStoragePublicDirectory(
-                            Environment.DIRECTORY_PICTURES), "mididi.mid");
-                    f.createNewFile();
-                    MidiSystem.write(s,1,f);
-
-                    Uri myUri = Uri.fromFile(f);
-                    MediaPlayer mediaPlayer = new MediaPlayer();
-                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                    mediaPlayer.setDataSource(getContext(), myUri);
-                    mediaPlayer.prepare();
-                    mediaPlayer.start();
-
-
-                } //try
-                catch(Exception e)
-                {
-                    Toast.makeText(getContext(), "Exception caught " + e.toString(),Toast.LENGTH_SHORT).show();
-                } //catch
-                Log.e(TAG,ln("midifile end ");
-
-
-                MediaPlayer mediaPlayer = MediaPlayer.create(getContext(), R.raw.midifile);
-                mediaPlayer.start(); // no need to call prepare(); create() does that for you
-                */
                 break;
             }
+            */
             default:
                 break;
         }

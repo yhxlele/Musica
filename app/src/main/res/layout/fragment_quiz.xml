@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingLeft="30dip"
+        android:paddingRight="30dip"
+        android:weightSum="3.0"
+        android:gravity="center_horizontal|center_vertical" >
+<!--
+        <Button
+            android:id="@+id/practice_button"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1.0"
+            android:onClick="onPracticeClicked"
+            android:text="@string/practice_button"
+            android:textSize="24.0sp" />
+-->
+        <Button
+            android:id="@+id/quiz_button"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1.0"
+            android:onClick="onQuizClicked"
+            android:text="@string/quiz_button"
+            android:textSize="24.0sp" />
+
+    </LinearLayout>
+</LinearLayout>

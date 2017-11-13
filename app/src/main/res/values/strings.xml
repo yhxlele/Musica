@@ -8,4 +8,68 @@
     <string name="action_about">About</string>
     <string name="learn_page">Learn the notes</string>
     <string name="play_page">Play the music</string>
+    <string name="quiz_page">Quiz time</string>
+    <string name="result_page">Result</string>
+    <string name="overview_page">Overview</string>
+    <string name="pitch">Redefine music notes learning, pitch training, and sight reading.</string>
+
+
+    <string name="version">Version %s</string>
+    <string name="slogan">Read music sheets faster!</string>
+    <string name="practice_button">Practice</string>
+    <string name="quiz_button">Let Us Start!</string>
+    <string name="stats_button">Statistics</string>
+    <string name="options_button">Options</string>
+    <string name="clefs">Clefs</string>
+
+    <string name="treble">Treble</string>
+    <string name="soprano">Soprano</string>
+    <string name="mezzo_soprano">Mezzo Soprano</string>
+    <string name="alto">Alto</string>
+    <string name="tenor">Tenor</string>
+    <string name="baritone">Baritone</string>
+    <string name="bass">Bass</string>
+
+    <string name="practice">Practice</string>
+    <string name="enable_show_correct">Show correct answers when wrong</string>
+    <string name="enable_vibration_on_wrong">Vibration on wrong answers</string>
+    <string name="save_options">Save</string>
+    <string name="cancel_options">Cancel</string>
+    <string name="wrong_attempts">Wrong Attempts</string>
+    <string name="total_time">Total Time</string>
+    <string name="quiz_limit">Number of notes</string>
+    <string name="quiz">Quiz</string>
+    <string name="appearance">Appearance</string>
+    <string name="dark">Dark theme</string>
+    <string name="light">Light theme</string>
+    <string name="minutes_seconds" formatted="false">%d:%02ds</string>
+    <string name="seconds" formatted="false">%ds</string>
+    <string name="minutes_seconds_mseconds" formatted="false">%d:%02d.%03ds</string>
+    <string name="seconds_mseconds" formatted="false">%02d.%03ds</string>
+    <string name="zero_seconds">0s</string>
+    <string name="avg_note_time">Average Note Time</string>
+
+    <string-array name="note_names_english">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+        <item>G</item>
+    </string-array>
+    <string-array name="note_names_italian">
+        <item>La</item>
+        <item>Si</item>
+        <item>Do</item>
+        <item>Re</item>
+        <item>Mi</item>
+        <item>Fa</item>
+        <item>Sol</item>
+    </string-array>
+
+    <string name="note_naming_style">Note naming style</string>
+    <string name="note_naming_english">English (C,D,E,F,G,A,B)</string>
+    <string name="note_naming_italian">Italian (Do,Re,Mi,Fa,Sol,La,Si)</string>
+    <string name="difficulty_level">Difficulty level</string>
 </resources>

@@ -72,16 +72,17 @@ public class LearnActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_overview) {
-            Toast.makeText(getApplicationContext(),"Overview", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent (this, OverviewActivity.class);
+            startActivity (intent);
         } else if (id == R.id.action_learn) {
             Intent intent = new Intent (this, LearnActivity.class);
             startActivity (intent);
         } else if (id == R.id.action_play) {
             Intent intent = new Intent (this, PlayActivity.class);
             startActivity (intent);
-        } else if (id == R.id.action_logout) {
+        } /*else if (id == R.id.action_logout) {
             Toast.makeText(getApplicationContext(),"Logout", Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }

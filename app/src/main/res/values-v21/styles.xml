@@ -5,4 +5,10 @@
             <item name="android:windowDrawsSystemBarBackgrounds">true</item>
             <item name="android:statusBarColor">@android:color/transparent</item>
         </style>
+        <style name="DarkTheme" parent="@android:style/Theme.Holo.NoActionBar">
+        </style>
+        <style name="LightTheme" parent="@android:style/Theme.Holo.Light" >
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        </style>
 </resources>

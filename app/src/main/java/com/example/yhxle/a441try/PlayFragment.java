@@ -188,6 +188,8 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                             paint_oval.setColor(Color.BLACK);
                                             Canvas c_oval = new Canvas(bmp_oval);
                                             c_oval.drawRect(530, 140, 540, 350, paint_oval);
+                                            c_oval.drawRect(430, 345, 570, 355, paint_oval);
+
                                             RectF rect = new RectF(460, 320, 540, 380);
                                             c_oval.drawOval(rect, paint_oval);
                                             //note_imageview.setImageBitmap(bmp_oval);
@@ -441,7 +443,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
         Bitmap bmp_g = Bitmap.createBitmap(1000, 100,  Bitmap.Config.ARGB_8888);
         Paint paint_g = new Paint();
         paint_g.setAntiAlias(true);
-        paint_g.setColor(Color.GRAY);
+        paint_g.setColor(Color.TRANSPARENT);
         Canvas c_g = new Canvas(bmp_g);
         c_g.drawRect(0,45,1000,55, paint_g);
 
@@ -667,6 +669,8 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                 paint_oval.setColor(Color.BLACK);
                 Canvas c_oval = new Canvas(bmp_oval);
                 c_oval.drawRect(530, 140, 540, 350, paint_oval);
+                c_oval.drawRect(430, 345, 570, 355, paint_oval);
+
                 RectF rect = new RectF(460, 320, 540, 380);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
@@ -708,33 +712,29 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                     ///  Toast.makeText(getContext(), "Exception caught ERETryty" ,Toast.LENGTH_SHORT).show();
                     int[  ] allowedTypes = MidiSystem.getMidiFileTypes(sequence);
 
-                    if (allowedTypes.length == 0) {
-                        Toast.makeText(getContext(), "No allowTypes" ,Toast.LENGTH_SHORT).show();
-                        System.err.println("No supported MIDI file types.");
-                    }
-                    else {
+
                         if (ContextCompat.checkSelfPermission(getActivity(),
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                Manifest.permission.READ_EXTERNAL_STORAGE)
                                 != PackageManager.PERMISSION_GRANTED) {
 
                             // Should we show an explanation?
                             if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-                                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
-                                Toast.makeText(getContext(),"Ask for Write permission", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(),"Ask for READ permission", Toast.LENGTH_SHORT).show();
 
                             } else {
 
 
                                 ActivityCompat.requestPermissions(getActivity(),
-                                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                        MY_PERMISSIONS_WRITE_EXTERNAL_FILE);
+                                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                                        MY_PERMISSIONS_READ_EXTERNAL_FILE);
 
                             }
                         }
 
                         while (ContextCompat.checkSelfPermission(getActivity(),
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                Manifest.permission.READ_EXTERNAL_STORAGE)
                                 != PackageManager.PERMISSION_GRANTED) {
                             Toast.makeText(getContext(),"failpermission", Toast.LENGTH_SHORT).show();
                         }
@@ -757,7 +757,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
 
 
 
-                    }
+
                 } catch(Exception e) {
 
                     Toast.makeText(getContext(), "Exception caught " + e.toString(),Toast.LENGTH_SHORT).show();
@@ -836,16 +836,16 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case MY_PERMISSIONS_WRITE_EXTERNAL_FILE: {
+            case MY_PERMISSIONS_READ_EXTERNAL_FILE: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    Toast.makeText(getContext(), "Write permission accessed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Read permission accessed", Toast.LENGTH_SHORT).show();
 
                 } else {
 
-                    Toast.makeText(getContext(), "Write permission denied", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Read permission denied", Toast.LENGTH_SHORT).show();
                 }
                 return;
             }
