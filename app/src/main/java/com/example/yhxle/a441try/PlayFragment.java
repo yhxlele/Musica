@@ -177,11 +177,16 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                     String noteName = NOTE_NAMES[note];
                                     int velocity = sm.getData2();
                                     Log.e(TAG, "Note on, " + noteName + octave + " key=" + key + " velocity: " + velocity);
-                                    TextView textView = (TextView) myView.findViewById(R.id.show);
+                                    final TextView textView = (TextView) myView.findViewById(R.id.show);
                                     final ImageView note_imageview = (ImageView) myView.findViewById(R.id.note);
                                     switch (key) {
                                         case C4: {
-                                            textView.setText("Middle C");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                     textView.setText("Middle C");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -202,7 +207,12 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                             break;
                                         }
                                         case D4: {
-                                            textView.setText("Middle D");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("Middle D");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -221,7 +231,12 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                             break;
                                         }
                                         case E4: {
-                                            textView.setText("Middle E");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("Middle E");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -240,7 +255,12 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                             break;
                                         }
                                         case F4: {
-                                            textView.setText("Middle F");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("Middle F");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -259,7 +279,12 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                             break;
                                         }
                                         case G4: {
-                                            textView.setText("Middle G");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("Middle G");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -278,7 +303,12 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                             break;
                                         }
                                         case A4: {
-                                            textView.setText("Middle A");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("Middle A");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 460, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -297,7 +327,12 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                             break;
                                         }
                                         case B4: {
-                                            textView.setText("Middle B");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("Middle B");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -316,7 +351,12 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                             break;
                                         }
                                         case C5: {
-                                            textView.setText("High C");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("High C");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -335,7 +375,12 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                             break;
                                         }
                                         case D5: {
-                                            textView.setText("High D");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("High D");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -354,7 +399,12 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                             break;
                                         }
                                         case E5: {
-                                            textView.setText("High E");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("High E");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -373,7 +423,12 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                             break;
                                         }
                                         case F5: {
-                                            textView.setText("High F");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("High F");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
