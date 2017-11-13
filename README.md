@@ -1,4 +1,9 @@
 # Musica
+The way of compiling and run the App is simple. All you need to do is 
+cloning all the content in this repo and open up the source files in 
+Android Studio. Then you are able to utilize all the functionalities. 
+All the features are tested and run locally in each one's machine before
+Musica is published to Google Play.
 #### Musica is a music learning App for people who would like to learn:
 - note-reading
 - pitch-training
