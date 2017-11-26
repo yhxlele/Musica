@@ -50,7 +50,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login:
-                Intent intent = new Intent (getActivity(), LearnActivity.class);
+                Intent intent = new Intent (getActivity(), OverviewActivity.class);
                 startActivity (intent);
                 break;
             default:
