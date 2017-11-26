@@ -16,6 +16,7 @@ import android.media.SoundPool;
 // import android.media.midi.*;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -32,6 +33,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.larvalabs.svgandroid.SVG;
@@ -180,9 +182,6 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                                     switch (key) {
                                         case C4: {
                                             textView.setText("Middle C");
-
-
-
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -433,6 +432,17 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_learn, container, false);
         myView = view;
+
+        Log.e(TAG, Build.MODEL);
+        if (false) {
+            ImageButton L = (ImageButton) view.findViewById(R.id.L0);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) L.getLayoutParams();
+            params.setMargins(0, 500, 0, 0);
+            L.setLayoutParams(params);
+
+            Log.e(TAG, "true");
+        }
+        
         Bitmap bmp = Bitmap.createBitmap(1000, 100,  Bitmap.Config.ARGB_8888);
         Paint paint = new Paint();
         paint.setAntiAlias(true);

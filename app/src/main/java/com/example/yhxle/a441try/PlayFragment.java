@@ -14,6 +14,7 @@ import android.graphics.RectF;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -27,11 +28,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.larvalabs.svgandroid.SVG;
 import com.larvalabs.svgandroid.SVGParser;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.InputStream;
@@ -488,6 +492,17 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_play, container, false);
         myView = view;
+
+        Log.e(TAG, Build.MODEL);
+        if (false) {
+            ImageButton L = (ImageButton) view.findViewById(R.id.L0);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) L.getLayoutParams();
+            params.setMargins(0, 500, 0, 0);
+            L.setLayoutParams(params);
+
+            Log.e(TAG, "true");
+        }
+
         Bitmap bmp = Bitmap.createBitmap(1000, 100,  Bitmap.Config.ARGB_8888);
         Paint paint = new Paint();
         paint.setAntiAlias(true);

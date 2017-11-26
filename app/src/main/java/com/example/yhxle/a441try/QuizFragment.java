@@ -1,6 +1,7 @@
 package com.example.yhxle.a441try;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 
 public class QuizFragment extends Fragment implements View.OnClickListener {
     public static final String TAG = "QuizFragment";
+    public static MediaPlayer mpp = new MediaPlayer();
+
 
     public QuizFragment() { super(); }
 

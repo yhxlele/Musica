@@ -8,8 +8,10 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +28,7 @@ import java.util.Random;
 
 
 public class QuizActivity extends Activity {
-
+    public static final String TAG = "QuizActivity";
 	private final static int NUM_CLEF_NOTES = 25;
 
     private boolean enable_show_correct;
@@ -39,6 +41,7 @@ public class QuizActivity extends Activity {
     private int default_color;
 
     private final int[][] levels = {{ 8,16 }, { 7,17 }, { 6,18 }, { 5,19 }, { 4,20 }, { 3,21 }, { 2,22 }, { 1,23 }, { 0,24 }};
+    private int[] sounds;
 
     private int[] clefs;	// treble, soprano, mezzo soprano, alto, tenor, baritone, bass
     private int[] notes;
@@ -64,11 +67,11 @@ public class QuizActivity extends Activity {
     private boolean time_elapsed_terminate;
 
     private int theme_id;
+    public static MediaPlayer mpp = new MediaPlayer();
 
 
     @Override
     public void onCreate (Bundle savedInstanceState) {
-
         super.onCreate (savedInstanceState);
 
         Bundle extras = getIntent ().getExtras ();
@@ -81,6 +84,12 @@ public class QuizActivity extends Activity {
         clefs = new int [7];
         notes = new int [25];
 
+        sounds = new int [88];
+        for (int i=0;i<88;i++) {
+            //Log.e(TAG, String.format ("piano_ff_0%02d", i + 1));
+            //Log.e(TAG, Integer.toString(getResources ().getIdentifier (String.format ("piano_ff_0%02d", i + 1), "raw", getPackageName())));
+            sounds[i] = getResources ().getIdentifier (String.format ("piano_ff_0%02d", i + 1), "raw", getPackageName());
+        }
         if (theme_id == R.style.DarkTheme) {
             svg = SVGParser.getSVGFromResource (getResources (), R.raw.dark_staff);
 
@@ -362,7 +371,70 @@ public class QuizActivity extends Activity {
 
         int clef = current_quiz / NUM_CLEF_NOTES;
         int note = current_quiz % NUM_CLEF_NOTES;
-
+        int sound;
+        sound = note / 7 * 12;
+        Log.e(TAG, Integer.toString(clef)+"   "+Integer.toString(note));
+        switch (clef) {
+            case 0: { /*treble*/
+                switch (note % 7) {
+                    case 6: /* C */
+                        sound += 40;
+                        break;
+                    case 0: /* D */
+                        sound += 30;
+                        break;
+                    case 1: /* E */
+                        sound += 32;
+                        break;
+                    case 2: /* F */
+                        sound += 33;
+                        break;
+                    case 3: /* G */
+                        sound += 35;
+                        break;
+                    case 4: /* A */
+                        sound += 37;
+                        break;
+                    case 5: /* B */
+                        sound += 39;
+                        break;
+                }
+                break;
+            }
+            case 6: { /*bass*/
+                switch (note % 7) {
+                    case 4: /* C */
+                        sound += 16;
+                        break;
+                    case 5: /* D */
+                        sound += 18;
+                        break;
+                    case 6: /* E */
+                        sound += 20;
+                        break;
+                    case 0: /* F */
+                        sound += 9;
+                        break;
+                    case 1: /* G */
+                        sound += 11;
+                        break;
+                    case 2: /* A */
+                        sound += 13;
+                        break;
+                    case 3: /* B */
+                        sound += 15;
+                        break;
+                }
+                break;
+            }
+            default:
+                break;
+        }
+        mpp.reset();
+        mpp.release();
+        Log.e(TAG, Integer.toString(sound));
+        mpp = MediaPlayer.create(this, sounds[sound-1]);
+        mpp.start();
         current_note   = (first_note[clef] + note) % 7;
         current_button = buttons[current_note];
 
