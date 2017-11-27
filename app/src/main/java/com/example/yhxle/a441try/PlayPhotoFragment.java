@@ -14,6 +14,7 @@ import android.graphics.RectF;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -27,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,12 +71,13 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
     public static final int F4 = 65;
     public static final int G4 = 67;
     public static final int A4 = 69;
-    public static final int B4 = 70;
+    public static final int B4 = 71;
     public static final int C5 = 72;
     public static final int D5 = 74;
     public static final int E5 = 76;
     public static final int F5 = 77;
     public static final MediaPlayer mp = new MediaPlayer();
+    public static File f2 = null;
 
     public static MediaPlayer mpp = new MediaPlayer();
     private Uri myUri = null;
@@ -105,7 +108,7 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                     // Get the Uri of the selected file
                     Uri uri = data.getData();
                     Log.d(TAG, "File Uri: " + uri.toString());
-                    myUri = uri;
+                    //myUri = uri;
 
                     HandleFile();
                     // Get the path
@@ -177,17 +180,24 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                                     String noteName = NOTE_NAMES[note];
                                     int velocity = sm.getData2();
                                     Log.e(TAG, "Note on, " + noteName + octave + " key=" + key + " velocity: " + velocity);
-                                    TextView textView = (TextView) myView.findViewById(R.id.show);
-                                    final ImageView note_imageview = (ImageView) myView.findViewById(R.id.note);
+                                    final TextView textView = (TextView) myView.findViewById(R.id.show2);
+                                    final ImageView note_imageview = (ImageView) myView.findViewById(R.id.note2);
                                     switch (key) {
                                         case C4: {
-                                            textView.setText("Middle C");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                     textView.setText("Middle C");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
                                             paint_oval.setColor(Color.BLACK);
                                             Canvas c_oval = new Canvas(bmp_oval);
                                             c_oval.drawRect(530, 140, 540, 350, paint_oval);
+                                            c_oval.drawRect(430, 345, 570, 355, paint_oval);
+
                                             RectF rect = new RectF(460, 320, 540, 380);
                                             c_oval.drawOval(rect, paint_oval);
                                             //note_imageview.setImageBitmap(bmp_oval);
@@ -200,7 +210,12 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                                             break;
                                         }
                                         case D4: {
-                                            textView.setText("Middle D");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("Middle D");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -219,7 +234,12 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                                             break;
                                         }
                                         case E4: {
-                                            textView.setText("Middle E");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("Middle E");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -238,7 +258,12 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                                             break;
                                         }
                                         case F4: {
-                                            textView.setText("Middle F");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("Middle F");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -257,7 +282,12 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                                             break;
                                         }
                                         case G4: {
-                                            textView.setText("Middle G");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("Middle G");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -276,7 +306,12 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                                             break;
                                         }
                                         case A4: {
-                                            textView.setText("Middle A");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("Middle A");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 460, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -295,7 +330,12 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                                             break;
                                         }
                                         case B4: {
-                                            textView.setText("Middle B");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("Middle B");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -314,7 +354,12 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                                             break;
                                         }
                                         case C5: {
-                                            textView.setText("High C");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("High C");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -333,7 +378,12 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                                             break;
                                         }
                                         case D5: {
-                                            textView.setText("High D");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("High D");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -352,7 +402,12 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                                             break;
                                         }
                                         case E5: {
-                                            textView.setText("High E");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("High E");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -371,7 +426,12 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                                             break;
                                         }
                                         case F5: {
-                                            textView.setText("High F");
+                                            textView.postDelayed( new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    textView.setText("High F");
+                                                }
+                                            }, event.getTick()*500/16);
                                             final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
                                             Paint paint_oval = new Paint();
                                             paint_oval.setAntiAlias(true);
@@ -429,8 +489,19 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_play, container, false);
+        View view = inflater.inflate(R.layout.fragment_photo, container, false);
         myView = view;
+
+        Log.e(TAG, Build.MODEL);
+        if (false) {
+            ImageButton L = (ImageButton) view.findViewById(R.id.L0);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) L.getLayoutParams();
+            params.setMargins(0, 500, 0, 0);
+            L.setLayoutParams(params);
+
+            Log.e(TAG, "true");
+        }
+
         Bitmap bmp = Bitmap.createBitmap(1000, 100,  Bitmap.Config.ARGB_8888);
         Paint paint = new Paint();
         paint.setAntiAlias(true);
@@ -441,7 +512,7 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
         Bitmap bmp_g = Bitmap.createBitmap(1000, 100,  Bitmap.Config.ARGB_8888);
         Paint paint_g = new Paint();
         paint_g.setAntiAlias(true);
-        paint_g.setColor(Color.GRAY);
+        paint_g.setColor(Color.TRANSPARENT);
         Canvas c_g = new Canvas(bmp_g);
         c_g.drawRect(0,45,1000,55, paint_g);
 
@@ -486,8 +557,8 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
     @TargetApi(23)
     @Override
     public void onClick(final View v) {
-        TextView textView = (TextView) v.getRootView().findViewById(R.id.show);
-        ImageView note_imageview  = (ImageView) v.getRootView().findViewById (R.id.note);
+        TextView textView = (TextView) v.getRootView().findViewById(R.id.show2);
+        ImageView note_imageview  = (ImageView) v.getRootView().findViewById (R.id.note2);
         switch (v.getId()) {
             case R.id.L1: {
                 textView.setText("High F");
@@ -667,6 +738,8 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                 paint_oval.setColor(Color.BLACK);
                 Canvas c_oval = new Canvas(bmp_oval);
                 c_oval.drawRect(530, 140, 540, 350, paint_oval);
+                c_oval.drawRect(430, 345, 570, 355, paint_oval);
+
                 RectF rect = new RectF(460, 320, 540, 380);
                 c_oval.drawOval(rect, paint_oval);
                 note_imageview.setImageBitmap(bmp_oval);
@@ -681,7 +754,6 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                 try {
                     int instrument = 0;
                     int tempo = 120;
-                    String filename = "hahah.midi";
 
                     // Parse the options
                     // -i <instrument number> default 0, a piano.  Allowed values: 0-127
@@ -697,16 +769,25 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
 
 
 
-                    char[  ] notes = "C C G G + A# A# - G/2 F F E# E# D# D# C".toCharArray( );
-
+                    char[  ] notes = "/2E /4G + /kD /2C - /4G /kF /2E /4E E F G /kA G /2E /4G + /kD /2C - /4G /kF /2E /4G G A B + /kC C /8D . . - G /4G B A G /2E /4G + /kC - /2A + /4C /2D /4C - /kB G /2E /4G + /kD /2C - /4G /kF /2E /4G G A B + /kC C".toCharArray( );
+                    char[  ] notes2 = "/8D D /4G /8G A B G B + C /4D /8D C - /4B /8A G /4A A B B /8A B A F /4D D /8G D G A B G B + C /4D /8D C - /4B /8A G /4A /8A A /4B /8B A /4G /8G A /2G + D - /jB /8A B + C - B A /jG /8A /4B /8B + C /4D /8C - B /4A /8A B /4A /8D D /4G /8G A /4B /8G A /4B /8B + C /4D /8D C - /4A A B /8B A /4G G /2G".toCharArray();
                     // 16 ticks per quarter note.
                     Sequence sequence = new Sequence(Sequence.PPQ, 16);
-
+                    Sequence sequence2 = new Sequence(Sequence.PPQ, 16);
                     // Add the specified notes to the track
                     addTrack(sequence, instrument, tempo, notes);
+                    addTrack(sequence2, instrument, tempo, notes2);
 // A file name was specified, so save the notes
-                    ///  Toast.makeText(getContext(), "Exception caught ERETryty" ,Toast.LENGTH_SHORT).show();
                     int[  ] allowedTypes = MidiSystem.getMidiFileTypes(sequence);
+                    int[  ] allowedTypes2 = MidiSystem.getMidiFileTypes(sequence2);
+                    File f = new File(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_MUSIC), "Edelweiss.mid");
+                    f.createNewFile();
+                    f2 = new File(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_MUSIC), "simple.mid");
+                    f2.createNewFile();
+                    MidiSystem.write(sequence, allowedTypes[0], f);
+                    MidiSystem.write(sequence2, allowedTypes2[0], f2);
 
 
                         if (ContextCompat.checkSelfPermission(getActivity(),
@@ -727,29 +808,14 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                                         MY_PERMISSIONS_READ_EXTERNAL_FILE);
 
                             }
+                        } else {
+                            showFileChooser();
+
                         }
 
-                        while (ContextCompat.checkSelfPermission(getActivity(),
-                                Manifest.permission.READ_EXTERNAL_STORAGE)
-                                != PackageManager.PERMISSION_GRANTED) {
-                            Toast.makeText(getContext(),"failpermission", Toast.LENGTH_SHORT).show();
-                        }
-/*
-                    Toast.makeText(getContext(),
-                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).toString(),
-                            Toast.LENGTH_SHORT).show();
-*/
-                        File f = new File(Environment.getExternalStoragePublicDirectory(
-                                Environment.DIRECTORY_MUSIC), "ajajf.mid");
-                        f.createNewFile();
-/*
-                    Toast.makeText(getContext(),
-                           Integer.toString(allowedTypes[0]),
-                            Toast.LENGTH_SHORT).show();
-*/
-                        MidiSystem.write(sequence, allowedTypes[0], f);
 
-                                showFileChooser();
+
+
 
 
 
@@ -812,7 +878,7 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
     }
     public void HandleFile (){
         try {
-            // Uri myUri = Uri.fromFile(f);
+            myUri = Uri.fromFile(f2);
             mp.reset();
             mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mp.setDataSource(getContext(), myUri);
@@ -838,10 +904,12 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     Toast.makeText(getContext(), "Read permission accessed", Toast.LENGTH_SHORT).show();
+                    showFileChooser();
 
                 } else {
 
                     Toast.makeText(getContext(), "Read permission denied", Toast.LENGTH_SHORT).show();
+
                 }
                 return;
             }
@@ -853,7 +921,7 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
 
     static final int[  ] offsets = {  // add these amounts to the base value
             // A   B  C  D  E  F  G
-            -4, -2, 0, 1, 3, 5, 7
+               9, 11, 0, 2, 4, 5, 7
     };
 
     /*
@@ -905,6 +973,8 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
             else if (c == '/') {
                 char d = notes[n++];
                 if (d == '2') notelength = 32;  // half note
+                else if (d == 'k') notelength = 48;
+                else if (d == 'j') notelength = 24;
                 else if (d == '4') notelength = 16;  // quarter note
                 else if (d == '8') notelength = 8;   // eighth note
                 else if (d == '3' && notes[n++] == '2') notelength = 2;
