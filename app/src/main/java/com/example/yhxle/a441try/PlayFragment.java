@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -86,6 +87,12 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
 
     private static final int FILE_SELECT_CODE = 0;
 
+    public static int dpToPx(int dp)
+    {
+        Log.e(TAG, Float.toString(Resources.getSystem().getDisplayMetrics().density));
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
+
     private void showFileChooser() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*");
@@ -149,6 +156,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
 
         return null;
     }
+
 
     public static final int NOTE_ON = 0x90;
         public static final int NOTE_OFF = 0x80;
@@ -503,19 +511,19 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
             Log.e(TAG, "true");
         }
 
-        Bitmap bmp = Bitmap.createBitmap(1000, 100,  Bitmap.Config.ARGB_8888);
+        Bitmap bmp = Bitmap.createBitmap(dpToPx(333), dpToPx(33),  Bitmap.Config.ARGB_8888);
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setColor(Color.BLACK);
         Canvas c = new Canvas(bmp);
-        c.drawRect(0,45,1000,55, paint);
+        c.drawRect(0,dpToPx(15),dpToPx(333),dpToPx(18), paint);
 
-        Bitmap bmp_g = Bitmap.createBitmap(1000, 100,  Bitmap.Config.ARGB_8888);
+        Bitmap bmp_g = Bitmap.createBitmap(dpToPx(333), dpToPx(33),  Bitmap.Config.ARGB_8888);
         Paint paint_g = new Paint();
         paint_g.setAntiAlias(true);
         paint_g.setColor(Color.TRANSPARENT);
         Canvas c_g = new Canvas(bmp_g);
-        c_g.drawRect(0,45,1000,55, paint_g);
+        c_g.drawRect(0,dpToPx(15),dpToPx(333),dpToPx(18), paint_g);
 
         ImageButton l1 = (ImageButton) view.findViewById(R.id.L1);
         l1.setOnClickListener(this);
@@ -554,7 +562,40 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
         svg = SVGParser.getSVGFromResource (getResources (), R.raw.light_note07);
         return view;
     }
-
+    Bitmap mydraw_high(int i) {
+        Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
+        Paint paint_oval = new Paint();
+        paint_oval.setAntiAlias(true);
+        paint_oval.setColor(Color.BLACK);
+        Canvas c_oval = new Canvas(bmp_oval);
+        c_oval.drawRect(460, 110+30*i, 470, 320+30*i, paint_oval);
+        RectF rect = new RectF(460, 80+30*i, 540, 140+30*i);
+        c_oval.drawOval(rect, paint_oval);
+        return bmp_oval;
+    }
+    Bitmap mydraw(int i) {
+        Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
+        Paint paint_oval = new Paint();
+        paint_oval.setAntiAlias(true);
+        paint_oval.setColor(Color.BLACK);
+        Canvas c_oval = new Canvas(bmp_oval);
+        c_oval.drawRect(530, 20+30*i, 540, 230+30*i, paint_oval);
+        RectF rect = new RectF(460, 200+30*i, 540, 260+30*i);
+        c_oval.drawOval(rect, paint_oval);
+        return bmp_oval;
+    }
+    Bitmap mydraw_c() {
+        Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
+        Paint paint_oval = new Paint();
+        paint_oval.setAntiAlias(true);
+        paint_oval.setColor(Color.BLACK);
+        Canvas c_oval = new Canvas(bmp_oval);
+        c_oval.drawRect(530, 140, 540, 350, paint_oval);
+        c_oval.drawRect(430, 345, 570, 355, paint_oval);
+        RectF rect = new RectF(460, 320, 540, 380);
+        c_oval.drawOval(rect, paint_oval);
+        return bmp_oval;
+    }
     @TargetApi(23)
     @Override
     public void onClick(final View v) {
@@ -563,15 +604,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.L1: {
                 textView.setText("High F");
-                Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
-                Paint paint_oval = new Paint();
-                paint_oval.setAntiAlias(true);
-                paint_oval.setColor(Color.BLACK);
-                Canvas c_oval = new Canvas(bmp_oval);
-                c_oval.drawRect(460, 110, 470, 320, paint_oval);
-                RectF rect = new RectF(460, 80, 540, 140);
-                c_oval.drawOval(rect, paint_oval);
-                note_imageview.setImageBitmap(bmp_oval);
+                note_imageview.setImageBitmap(mydraw_high(0));
                 mpp.reset();
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_057);
@@ -580,15 +613,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
             }
             case R.id.L2: {
                 textView.setText("High E");
-                Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
-                Paint paint_oval = new Paint();
-                paint_oval.setAntiAlias(true);
-                paint_oval.setColor(Color.BLACK);
-                Canvas c_oval = new Canvas(bmp_oval);
-                c_oval.drawRect(460, 140, 470, 350, paint_oval);
-                RectF rect = new RectF(460, 110, 540, 170);
-                c_oval.drawOval(rect, paint_oval);
-                note_imageview.setImageBitmap(bmp_oval);
+                note_imageview.setImageBitmap(mydraw_high(1));
                 mpp.reset();
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_056);
@@ -597,15 +622,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
             }
             case R.id.L3: {
                 textView.setText("High D");
-                Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
-                Paint paint_oval = new Paint();
-                paint_oval.setAntiAlias(true);
-                paint_oval.setColor(Color.BLACK);
-                Canvas c_oval = new Canvas(bmp_oval);
-                c_oval.drawRect(460, 170, 470, 380, paint_oval);
-                RectF rect = new RectF(460, 140, 540, 200);
-                c_oval.drawOval(rect, paint_oval);
-                note_imageview.setImageBitmap(bmp_oval);
+                note_imageview.setImageBitmap(mydraw_high(2));
                 mpp.reset();
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_054);
@@ -614,15 +631,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
             }
             case R.id.L4: {
                 textView.setText("High C");
-                Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
-                Paint paint_oval = new Paint();
-                paint_oval.setAntiAlias(true);
-                paint_oval.setColor(Color.BLACK);
-                Canvas c_oval = new Canvas(bmp_oval);
-                c_oval.drawRect(460, 200, 470, 410, paint_oval);
-                RectF rect = new RectF(460, 170, 540, 230);
-                c_oval.drawOval(rect, paint_oval);
-                note_imageview.setImageBitmap(bmp_oval);
+                note_imageview.setImageBitmap(mydraw_high(3));
                 mpp.reset();
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_052);
@@ -631,15 +640,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
             }
             case R.id.L5: {
                 textView.setText("Middle B");
-                Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
-                Paint paint_oval = new Paint();
-                paint_oval.setAntiAlias(true);
-                paint_oval.setColor(Color.BLACK);
-                Canvas c_oval = new Canvas(bmp_oval);
-                c_oval.drawRect(530, 20, 540, 230, paint_oval);
-                RectF rect = new RectF(460, 200, 540, 260);
-                c_oval.drawOval(rect, paint_oval);
-                note_imageview.setImageBitmap(bmp_oval);
+                note_imageview.setImageBitmap(mydraw(0));
                 mpp.reset();
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_051);
@@ -648,15 +649,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
             }
             case R.id.L6: {
                 textView.setText("Middle A");
-                Bitmap bmp_oval = Bitmap.createBitmap(1000, 460, Bitmap.Config.ARGB_8888);
-                Paint paint_oval = new Paint();
-                paint_oval.setAntiAlias(true);
-                paint_oval.setColor(Color.BLACK);
-                Canvas c_oval = new Canvas(bmp_oval);
-                c_oval.drawRect(530, 20, 540, 230, paint_oval);
-                RectF rect = new RectF(460, 200, 540, 260);
-                c_oval.drawOval(rect, paint_oval);
-                note_imageview.setImageBitmap(bmp_oval);
+                note_imageview.setImageBitmap(mydraw(1));
                 mpp.reset();
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_049);
@@ -665,15 +658,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
             }
             case R.id.L7: {
                 textView.setText("Middle G");
-                Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
-                Paint paint_oval = new Paint();
-                paint_oval.setAntiAlias(true);
-                paint_oval.setColor(Color.BLACK);
-                Canvas c_oval = new Canvas(bmp_oval);
-                c_oval.drawRect(530, 20, 540, 230, paint_oval);
-                RectF rect = new RectF(460, 200, 540, 260);
-                c_oval.drawOval(rect, paint_oval);
-                note_imageview.setImageBitmap(bmp_oval);
+                note_imageview.setImageBitmap(mydraw(2));
                 mpp.reset();
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_047);
@@ -682,15 +667,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
             }
             case R.id.L8: {
                 textView.setText("Middle F");
-                Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
-                Paint paint_oval = new Paint();
-                paint_oval.setAntiAlias(true);
-                paint_oval.setColor(Color.BLACK);
-                Canvas c_oval = new Canvas(bmp_oval);
-                c_oval.drawRect(530, 50, 540, 260, paint_oval);
-                RectF rect = new RectF(460, 230, 540, 290);
-                c_oval.drawOval(rect, paint_oval);
-                note_imageview.setImageBitmap(bmp_oval);
+                note_imageview.setImageBitmap(mydraw(3));
                 mpp.reset();
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_045);
@@ -699,15 +676,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
             }
             case R.id.L9: {
                 textView.setText("Middle E");
-                Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
-                Paint paint_oval = new Paint();
-                paint_oval.setAntiAlias(true);
-                paint_oval.setColor(Color.BLACK);
-                Canvas c_oval = new Canvas(bmp_oval);
-                c_oval.drawRect(530, 80, 540, 290, paint_oval);
-                RectF rect = new RectF(460, 260, 540, 320);
-                c_oval.drawOval(rect, paint_oval);
-                note_imageview.setImageBitmap(bmp_oval);
+                note_imageview.setImageBitmap(mydraw(4));
                 mpp.reset();
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_044);
@@ -716,15 +685,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
             }
             case R.id.L10: {
                 textView.setText("Middle D");
-                Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
-                Paint paint_oval = new Paint();
-                paint_oval.setAntiAlias(true);
-                paint_oval.setColor(Color.BLACK);
-                Canvas c_oval = new Canvas(bmp_oval);
-                c_oval.drawRect(530, 110, 540, 320, paint_oval);
-                RectF rect = new RectF(460, 290, 540, 350);
-                c_oval.drawOval(rect, paint_oval);
-                note_imageview.setImageBitmap(bmp_oval);
+                note_imageview.setImageBitmap(mydraw(5));
                 mpp.reset();
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_042);
@@ -733,17 +694,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
             }
             case R.id.L11: {
                 textView.setText("Middle C");
-                Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
-                Paint paint_oval = new Paint();
-                paint_oval.setAntiAlias(true);
-                paint_oval.setColor(Color.BLACK);
-                Canvas c_oval = new Canvas(bmp_oval);
-                c_oval.drawRect(530, 140, 540, 350, paint_oval);
-                c_oval.drawRect(430, 345, 570, 355, paint_oval);
-
-                RectF rect = new RectF(460, 320, 540, 380);
-                c_oval.drawOval(rect, paint_oval);
-                note_imageview.setImageBitmap(bmp_oval);
+                note_imageview.setImageBitmap(mydraw_c());
                 mpp.reset();
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_040);
