@@ -13,63 +13,63 @@
             <ImageButton
                 android:id="@+id/L0"
                 android:layout_width="match_parent"
-                android:layout_marginTop="74dp"
-                android:layout_height="11.67dp"
+                android:layout_marginTop="82dp"
+                android:layout_height="10.3dp"
                 android:background="@android:color/transparent"/>
             <ImageButton
                 android:id="@+id/L1"
                 android:layout_width="match_parent"
-                android:layout_height="11.67dp"
+                android:layout_height="10.3dp"
                 android:background="@android:color/transparent"/>
             <ImageButton
                 android:id="@+id/L2"
                 android:layout_width="match_parent"
-                android:layout_height="11.67dp"
+                android:layout_height="10.3dp"
                 android:background="@android:color/transparent"/>
             <ImageButton
                 android:id="@+id/L3"
                 android:layout_width="match_parent"
-                android:layout_height="11.67dp"
+                android:layout_height="10.3dp"
                 android:background="@android:color/transparent"/>
             <ImageButton
                 android:id="@+id/L4"
                 android:layout_width="match_parent"
-                android:layout_height="11.67dp"
+                android:layout_height="10.3dp"
                 android:background="@android:color/transparent"/>
             <ImageButton
                 android:id="@+id/L5"
                 android:layout_width="match_parent"
-                android:layout_height="11.67dp"
+                android:layout_height="10.3dp"
                 android:background="@android:color/transparent"/>
             <ImageButton
                 android:id="@+id/L6"
                 android:layout_width="match_parent"
-                android:layout_height="11.67dp"
+                android:layout_height="10.3dp"
                 android:background="@android:color/transparent"/>
             <ImageButton
                 android:id="@+id/L7"
                 android:layout_width="match_parent"
-                android:layout_height="11.67dp"
+                android:layout_height="10.3dp"
                 android:background="@android:color/transparent"/>
             <ImageButton
                 android:id="@+id/L8"
                 android:layout_width="match_parent"
-                android:layout_height="11.67dp"
+                android:layout_height="10.3dp"
                 android:background="@android:color/transparent"/>
             <ImageButton
                 android:id="@+id/L9"
                 android:layout_width="match_parent"
-                android:layout_height="11.67dp"
+                android:layout_height="10.3dp"
                 android:background="@android:color/transparent"/>
             <ImageButton
                 android:id="@+id/L10"
                 android:layout_width="match_parent"
-                android:layout_height="11.67dp"
+                android:layout_height="10.3dp"
                 android:background="@android:color/transparent"/>
             <ImageButton
                 android:id="@+id/L11"
                 android:layout_width="match_parent"
-                android:layout_height="11.67dp"
+                android:layout_height="10.3dp"
                 android:background="@android:color/transparent"/>
         </LinearLayout>
     </FrameLayout>
