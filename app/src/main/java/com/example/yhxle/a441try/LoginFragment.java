@@ -52,6 +52,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             case R.id.login:
                 Intent intent = new Intent (getActivity(), OverviewActivity.class);
                 startActivity (intent);
+                //Toast.makeText(getContext(),"Username does not exist!", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;

@@ -31,7 +31,7 @@
         <Button
             android:id="@+id/learn"
             android:layout_marginTop="200dp"
-            android:layout_marginLeft="45dp"
+            android:layout_marginLeft="50dp"
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:text="Learn" />
@@ -39,7 +39,7 @@
         <Button
             android:id="@+id/quiz"
             android:layout_marginTop="200dp"
-            android:layout_marginLeft="200dp"
+            android:layout_marginLeft="205dp"
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:text="Quiz" />
@@ -47,7 +47,7 @@
         <Button
             android:id="@+id/play"
             android:layout_marginTop="350dp"
-            android:layout_marginLeft="125dp"
+            android:layout_marginLeft="130dp"
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:text="Play" />
