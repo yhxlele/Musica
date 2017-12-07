@@ -619,7 +619,7 @@ public class PlayPhotoFragment extends Fragment implements View.OnClickListener 
                     int[  ] allowedTypes = MidiSystem.getMidiFileTypes(sequence);
                     int[  ] allowedTypes2 = MidiSystem.getMidiFileTypes(sequence2);
                     File f = new File(Environment.getExternalStoragePublicDirectory(
-                            Environment.DIRECTORY_MUSIC), "Edelweiss.mid");
+                            Environment.DIRECTORY_MUSIC), "Sea.mid");
                     f.createNewFile();
                     f2 = new File(Environment.getExternalStoragePublicDirectory(
                             Environment.DIRECTORY_MUSIC), "simple.mid");

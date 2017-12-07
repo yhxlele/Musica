@@ -196,24 +196,13 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                             textView.postDelayed( new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                     textView.setText("Middle C");
+                                                    textView.setText("Middle C");
                                                 }
                                             }, event.getTick()*500/16);
-                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
-                                            Paint paint_oval = new Paint();
-                                            paint_oval.setAntiAlias(true);
-                                            paint_oval.setColor(Color.BLACK);
-                                            Canvas c_oval = new Canvas(bmp_oval);
-                                            c_oval.drawRect(530, 140, 540, 350, paint_oval);
-                                            c_oval.drawRect(430, 345, 570, 355, paint_oval);
-
-                                            RectF rect = new RectF(460, 320, 540, 380);
-                                            c_oval.drawOval(rect, paint_oval);
-                                            //note_imageview.setImageBitmap(bmp_oval);
                                             note_imageview.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                    note_imageview.setImageBitmap(mydraw_c());
                                                 }
                                             }, event.getTick()*500/16);
                                             break;
@@ -225,19 +214,10 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                                     textView.setText("Middle D");
                                                 }
                                             }, event.getTick()*500/16);
-                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
-                                            Paint paint_oval = new Paint();
-                                            paint_oval.setAntiAlias(true);
-                                            paint_oval.setColor(Color.BLACK);
-                                            Canvas c_oval = new Canvas(bmp_oval);
-                                            c_oval.drawRect(530, 110, 540, 320, paint_oval);
-                                            RectF rect = new RectF(460, 290, 540, 350);
-                                            c_oval.drawOval(rect, paint_oval);
-                                            //note_imageview.setImageBitmap(bmp_oval);
                                             note_imageview.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                    note_imageview.setImageBitmap(mydraw(5));
                                                 }
                                             },event.getTick()*500/16);
                                             break;
@@ -249,19 +229,10 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                                     textView.setText("Middle E");
                                                 }
                                             }, event.getTick()*500/16);
-                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
-                                            Paint paint_oval = new Paint();
-                                            paint_oval.setAntiAlias(true);
-                                            paint_oval.setColor(Color.BLACK);
-                                            Canvas c_oval = new Canvas(bmp_oval);
-                                            c_oval.drawRect(530, 80, 540, 290, paint_oval);
-                                            RectF rect = new RectF(460, 260, 540, 320);
-                                            c_oval.drawOval(rect, paint_oval);
-                                            //note_imageview.setImageBitmap(bmp_oval);
                                             note_imageview.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                    note_imageview.setImageBitmap(mydraw(4));
                                                 }
                                             }, event.getTick()*500/16);
                                             break;
@@ -273,19 +244,10 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                                     textView.setText("Middle F");
                                                 }
                                             }, event.getTick()*500/16);
-                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
-                                            Paint paint_oval = new Paint();
-                                            paint_oval.setAntiAlias(true);
-                                            paint_oval.setColor(Color.BLACK);
-                                            Canvas c_oval = new Canvas(bmp_oval);
-                                            c_oval.drawRect(530, 50, 540, 260, paint_oval);
-                                            RectF rect = new RectF(460, 230, 540, 290);
-                                            c_oval.drawOval(rect, paint_oval);
-                                            //note_imageview.setImageBitmap(bmp_oval);
                                             note_imageview.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                    note_imageview.setImageBitmap(mydraw(3));
                                                 }
                                             }, event.getTick()*500/16);
                                             break;
@@ -297,19 +259,10 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                                     textView.setText("Middle G");
                                                 }
                                             }, event.getTick()*500/16);
-                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
-                                            Paint paint_oval = new Paint();
-                                            paint_oval.setAntiAlias(true);
-                                            paint_oval.setColor(Color.BLACK);
-                                            Canvas c_oval = new Canvas(bmp_oval);
-                                            c_oval.drawRect(530, 20, 540, 230, paint_oval);
-                                            RectF rect = new RectF(460, 200, 540, 260);
-                                            c_oval.drawOval(rect, paint_oval);
-                                            //note_imageview.setImageBitmap(bmp_oval);
                                             note_imageview.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                    note_imageview.setImageBitmap(mydraw(2));
                                                 }
                                             }, event.getTick()*500/16);
                                             break;
@@ -321,19 +274,10 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                                     textView.setText("Middle A");
                                                 }
                                             }, event.getTick()*500/16);
-                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 460, Bitmap.Config.ARGB_8888);
-                                            Paint paint_oval = new Paint();
-                                            paint_oval.setAntiAlias(true);
-                                            paint_oval.setColor(Color.BLACK);
-                                            Canvas c_oval = new Canvas(bmp_oval);
-                                            c_oval.drawRect(530, 20, 540, 230, paint_oval);
-                                            RectF rect = new RectF(460, 200, 540, 260);
-                                            c_oval.drawOval(rect, paint_oval);
-                                            //note_imageview.setImageBitmap(bmp_oval);
                                             note_imageview.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                    note_imageview.setImageBitmap(mydraw(1));
                                                 }
                                             }, event.getTick()*500/16);
                                             break;
@@ -345,19 +289,10 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                                     textView.setText("Middle B");
                                                 }
                                             }, event.getTick()*500/16);
-                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
-                                            Paint paint_oval = new Paint();
-                                            paint_oval.setAntiAlias(true);
-                                            paint_oval.setColor(Color.BLACK);
-                                            Canvas c_oval = new Canvas(bmp_oval);
-                                            c_oval.drawRect(530, 20, 540, 230, paint_oval);
-                                            RectF rect = new RectF(460, 200, 540, 260);
-                                            c_oval.drawOval(rect, paint_oval);
-                                            //note_imageview.setImageBitmap(bmp_oval);
                                             note_imageview.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                    note_imageview.setImageBitmap(mydraw(0));
                                                 }
                                             }, event.getTick()*500/16);
                                             break;
@@ -369,19 +304,10 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                                     textView.setText("High C");
                                                 }
                                             }, event.getTick()*500/16);
-                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
-                                            Paint paint_oval = new Paint();
-                                            paint_oval.setAntiAlias(true);
-                                            paint_oval.setColor(Color.BLACK);
-                                            Canvas c_oval = new Canvas(bmp_oval);
-                                            c_oval.drawRect(460, 200, 470, 410, paint_oval);
-                                            RectF rect = new RectF(460, 170, 540, 230);
-                                            c_oval.drawOval(rect, paint_oval);
-                                            //note_imageview.setImageBitmap(bmp_oval);
                                             note_imageview.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                    note_imageview.setImageBitmap(mydraw_high(3));
                                                 }
                                             }, event.getTick()*500/16);
                                             break;
@@ -393,19 +319,10 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                                     textView.setText("High D");
                                                 }
                                             }, event.getTick()*500/16);
-                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
-                                            Paint paint_oval = new Paint();
-                                            paint_oval.setAntiAlias(true);
-                                            paint_oval.setColor(Color.BLACK);
-                                            Canvas c_oval = new Canvas(bmp_oval);
-                                            c_oval.drawRect(460, 170, 470, 380, paint_oval);
-                                            RectF rect = new RectF(460, 140, 540, 200);
-                                            c_oval.drawOval(rect, paint_oval);
-                                            //note_imageview.setImageBitmap(bmp_oval);
                                             note_imageview.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                    note_imageview.setImageBitmap(mydraw_high(2));
                                                 }
                                             }, event.getTick()*500/16);
                                             break;
@@ -417,19 +334,10 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                                     textView.setText("High E");
                                                 }
                                             }, event.getTick()*500/16);
-                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
-                                            Paint paint_oval = new Paint();
-                                            paint_oval.setAntiAlias(true);
-                                            paint_oval.setColor(Color.BLACK);
-                                            Canvas c_oval = new Canvas(bmp_oval);
-                                            c_oval.drawRect(460, 140, 470, 350, paint_oval);
-                                            RectF rect = new RectF(460, 110, 540, 170);
-                                            c_oval.drawOval(rect, paint_oval);
-                                            //note_imageview.setImageBitmap(bmp_oval);
                                             note_imageview.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                    note_imageview.setImageBitmap(mydraw_high(1));
                                                 }
                                             }, event.getTick()*500/16);
                                             break;
@@ -441,19 +349,10 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                                                     textView.setText("High F");
                                                 }
                                             }, event.getTick()*500/16);
-                                            final Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
-                                            Paint paint_oval = new Paint();
-                                            paint_oval.setAntiAlias(true);
-                                            paint_oval.setColor(Color.BLACK);
-                                            Canvas c_oval = new Canvas(bmp_oval);
-                                            c_oval.drawRect(460, 110, 470, 320, paint_oval);
-                                            RectF rect = new RectF(460, 80, 540, 140);
-                                            c_oval.drawOval(rect, paint_oval);
-                                            //note_imageview.setImageBitmap(bmp_oval);
                                             note_imageview.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    note_imageview.setImageBitmap(bmp_oval);
+                                                    note_imageview.setImageBitmap(mydraw_high(0));
                                                 }
                                             }, event.getTick()*500/16);
                                             break;
@@ -563,36 +462,36 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
         return view;
     }
     Bitmap mydraw_high(int i) {
-        Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
+        Bitmap bmp_oval = Bitmap.createBitmap(dpToPx(333), dpToPx(173), Bitmap.Config.ARGB_8888);
         Paint paint_oval = new Paint();
         paint_oval.setAntiAlias(true);
         paint_oval.setColor(Color.BLACK);
         Canvas c_oval = new Canvas(bmp_oval);
-        c_oval.drawRect(460, 110+30*i, 470, 320+30*i, paint_oval);
-        RectF rect = new RectF(460, 80+30*i, 540, 140+30*i);
+        c_oval.drawRect(dpToPx(153), dpToPx(10*i+37), dpToPx(156), dpToPx(10*i+107), paint_oval);
+        RectF rect = new RectF(dpToPx(153), dpToPx(10*i+27), dpToPx(180), dpToPx(10*i+47));
         c_oval.drawOval(rect, paint_oval);
         return bmp_oval;
     }
     Bitmap mydraw(int i) {
-        Bitmap bmp_oval = Bitmap.createBitmap(1000, 520, Bitmap.Config.ARGB_8888);
+        Bitmap bmp_oval = Bitmap.createBitmap(dpToPx(333), dpToPx(173), Bitmap.Config.ARGB_8888);
         Paint paint_oval = new Paint();
         paint_oval.setAntiAlias(true);
         paint_oval.setColor(Color.BLACK);
         Canvas c_oval = new Canvas(bmp_oval);
-        c_oval.drawRect(530, 20+30*i, 540, 230+30*i, paint_oval);
-        RectF rect = new RectF(460, 200+30*i, 540, 260+30*i);
+        c_oval.drawRect(dpToPx(177), dpToPx(10*i+7), dpToPx(180), dpToPx(10*i+76), paint_oval);
+        RectF rect = new RectF(dpToPx(153), dpToPx(10*i+67), dpToPx(180), dpToPx(10*i+87));
         c_oval.drawOval(rect, paint_oval);
         return bmp_oval;
     }
     Bitmap mydraw_c() {
-        Bitmap bmp_oval = Bitmap.createBitmap(1000, 400, Bitmap.Config.ARGB_8888);
+        Bitmap bmp_oval = Bitmap.createBitmap(dpToPx(333), dpToPx(133), Bitmap.Config.ARGB_8888);
         Paint paint_oval = new Paint();
         paint_oval.setAntiAlias(true);
         paint_oval.setColor(Color.BLACK);
         Canvas c_oval = new Canvas(bmp_oval);
-        c_oval.drawRect(530, 140, 540, 350, paint_oval);
-        c_oval.drawRect(430, 345, 570, 355, paint_oval);
-        RectF rect = new RectF(460, 320, 540, 380);
+        c_oval.drawRect(dpToPx(177), dpToPx(47), dpToPx(180), dpToPx(117), paint_oval);
+        c_oval.drawRect(dpToPx(143), dpToPx(115), dpToPx(190), dpToPx(118), paint_oval);
+        RectF rect = new RectF(dpToPx(153), dpToPx(107), dpToPx(180), dpToPx(127));
         c_oval.drawOval(rect, paint_oval);
         return bmp_oval;
     }
