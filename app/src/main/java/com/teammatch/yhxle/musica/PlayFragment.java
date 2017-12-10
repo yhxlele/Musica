@@ -83,6 +83,9 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
     private Uri myUri = null;
     private View myView;
 
+    private boolean songIsPlaying = false;
+    private int songPosition = -1;
+
     private static final int FILE_SELECT_CODE = 0;
 
     public static int dpToPx(int dp)
@@ -115,8 +118,8 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                     Uri uri = data.getData();
                     Log.d(TAG, "File Uri: " + uri.toString());
                     myUri = uri;
-
                     HandleFile();
+
                     // Get the path
                     try {
                         String path = getPath(getContext(), uri);
@@ -124,6 +127,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                     } catch (Exception e) {
                         Log.e(TAG, e.toString());
                     }
+
                     // Get the file instance
                     // File file = new File(path);
                     // Initiate the upload
@@ -453,6 +457,10 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
         Button record = (Button) view.findViewById(R.id.record);
         record.setOnClickListener(this);
         SVG svg;
+
+        Button stop = (Button) view.findViewById(R.id.stop);
+        stop.setOnClickListener(this);
+
         svg = SVGParser.getSVGFromResource (getResources (), R.raw.light_treble_clef);
         ImageView clef_imageview  = (ImageView) view.findViewById (R.id.clef);
         clef_imageview.setImageDrawable (svg.createPictureDrawable ());
@@ -498,6 +506,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
     public void onClick(final View v) {
         TextView textView = (TextView) v.getRootView().findViewById(R.id.show);
         ImageView note_imageview  = (ImageView) v.getRootView().findViewById (R.id.note);
+        Button myStopButton = (Button) v.getRootView().findViewById(R.id.stop);
         switch (v.getId()) {
             case R.id.L1: {
                 textView.setText("High F");
@@ -615,9 +624,6 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                     tempo = 120;
                     a+=2;
 
-
-
-
                     char[  ] notes = "/2E /4G + /kD /2C - /4G /kF /2E /4E E F G /kA G /2E /4G + /kD /2C - /4G /kF /2E /4G G A B + /kC C /8D . . - G /4G B A G /2E /4G + /kC - /2A + /4C /2D /4C - /kB G /2E /4G + /kD /2C - /4G /kF /2E /4G G A B + /kC C".toCharArray( );
 
                     // 16 ticks per quarter note.
@@ -625,27 +631,23 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
 
                     // Add the specified notes to the track
                     addTrack(sequence, instrument, tempo, notes);
-// A file name was specified, so save the notes
+
+                    // A file name was specified, so save the notes
                     int[  ] allowedTypes = MidiSystem.getMidiFileTypes(sequence);
                     File f = new File(Environment.getExternalStoragePublicDirectory(
                             Environment.DIRECTORY_MUSIC), "Edelweiss.mid");
                     f.createNewFile();
 
                     MidiSystem.write(sequence, allowedTypes[0], f);
-
-
                         if (ContextCompat.checkSelfPermission(getActivity(),
                                 Manifest.permission.READ_EXTERNAL_STORAGE)
                                 != PackageManager.PERMISSION_GRANTED) {
-
                             // Should we show an explanation?
                             if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
                                     Manifest.permission.READ_EXTERNAL_STORAGE)) {
-
                                 Toast.makeText(getContext(),"Ask for READ permission", Toast.LENGTH_SHORT).show();
 
                             } else {
-
 
                                 ActivityCompat.requestPermissions(getActivity(),
                                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
@@ -656,15 +658,8 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                             showFileChooser();
 
                         }
-
-
-
-
-
-
-
-
-                } catch(Exception e) {
+                }
+                catch(Exception e) {
 
                     Toast.makeText(getContext(), "Exception caught " + e.toString(),Toast.LENGTH_SHORT).show();
                 }
@@ -716,6 +711,21 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                 */
                 break;
             }
+            case R.id.stop: {
+                if (songIsPlaying) {
+                    mp.pause();
+                    songPosition = mp.getCurrentPosition();
+                    myStopButton.setText("Resume");
+                    songIsPlaying = false;
+                }
+                else {
+                    mp.seekTo(songPosition);
+                    mp.start();
+                    myStopButton.setText("Stop");
+                    songIsPlaying = true;
+                }
+            }
+
             default:
                 break;
         }
@@ -728,8 +738,8 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
             mp.setDataSource(getContext(), myUri);
             mp.prepare();
             mp.start();
+            songIsPlaying = true;
             //      mediaPlayer.release();
-
             //      f.delete();
             InputStream inputStream = getContext().getContentResolver().openInputStream(myUri);
             MyRead(inputStream);
@@ -740,7 +750,8 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
     }
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+                                           String permissions[],
+                                           int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_READ_EXTERNAL_FILE: {
                 // If request is cancelled, the result arrays are empty.
