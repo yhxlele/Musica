@@ -1,4 +1,4 @@
-package com.example.yhxle.a441try;
+package com.teammatch.yhxle.musica;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -7,10 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 /**
  * Created by yhxle on 10/30/2017.

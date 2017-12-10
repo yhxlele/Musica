@@ -1,4 +1,4 @@
-package com.example.yhxle.a441try;
+package com.teammatch.yhxle.musica;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -15,7 +15,6 @@ import android.graphics.RectF;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -29,7 +28,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 

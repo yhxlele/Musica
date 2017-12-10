@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.yhxle.a441try">
+    package="com.teammatch.yhxle.musica">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <!--
@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.teammatch.yhxle.musica.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
@@ -26,24 +26,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LearnActivity"
+            android:name="com.teammatch.yhxle.musica.LearnActivity"
             android:label="@string/learn_page"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".PlayActivity"
+            android:name="com.teammatch.yhxle.musica.PlayActivity"
             android:label="@string/play_page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".QuizActivity"
+            android:name="com.teammatch.yhxle.musica.QuizActivity"
             android:label="@string/quiz_page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ResultsActivity"
+            android:name="com.teammatch.yhxle.musica.ResultsActivity"
             android:label="@string/result_page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".OverviewActivity"
+            android:name="com.teammatch.yhxle.musica.OverviewActivity"
             android:label="@string/overview_page"
             android:theme="@style/AppTheme.NoActionBar" >
 

@@ -1,4 +1,4 @@
-package com.example.yhxle.a441try;
+package com.teammatch.yhxle.musica;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -35,8 +35,6 @@ import android.widget.Toast;
 
 import com.larvalabs.svgandroid.SVG;
 import com.larvalabs.svgandroid.SVGParser;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.InputStream;
