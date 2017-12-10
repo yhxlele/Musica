@@ -30,27 +30,27 @@
 
         <Button
             android:id="@+id/learn"
-            android:layout_marginTop="200dp"
-            android:layout_marginLeft="50dp"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:text="Learn" />
+            android:layout_marginTop="250dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            android:text="Note-reading" />
 
         <Button
             android:id="@+id/quiz"
-            android:layout_marginTop="200dp"
-            android:layout_marginLeft="205dp"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:text="Quiz" />
+            android:layout_marginTop="350dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            android:text="Pitch-training (Quiz)" />
 
         <Button
             android:id="@+id/play"
-            android:layout_marginTop="350dp"
-            android:layout_marginLeft="130dp"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:text="Play" />
+            android:layout_marginTop="450dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            android:text="Sight-reading" />
 
         <TextView
             android:id="@+id/musica"

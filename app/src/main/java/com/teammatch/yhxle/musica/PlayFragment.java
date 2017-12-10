@@ -460,36 +460,36 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
         return view;
     }
     Bitmap mydraw_high(int i) {
-        Bitmap bmp_oval = Bitmap.createBitmap(dpToPx(333), dpToPx(173), Bitmap.Config.ARGB_8888);
+        Bitmap bmp_oval = Bitmap.createBitmap(dpToPx(400), dpToPx(400), Bitmap.Config.ARGB_8888);
         Paint paint_oval = new Paint();
         paint_oval.setAntiAlias(true);
         paint_oval.setColor(Color.BLACK);
         Canvas c_oval = new Canvas(bmp_oval);
-        c_oval.drawRect(dpToPx(153), dpToPx(10*i+37), dpToPx(156), dpToPx(10*i+107), paint_oval);
-        RectF rect = new RectF(dpToPx(153), dpToPx(10*i+27), dpToPx(180), dpToPx(10*i+47));
+        c_oval.drawRect(dpToPx(160), dpToPx(23*i+77), dpToPx(165), dpToPx(23*i+175), paint_oval);
+        RectF rect = new RectF(dpToPx(160), dpToPx(22*i+52), dpToPx(222), dpToPx(22*i+98));
         c_oval.drawOval(rect, paint_oval);
         return bmp_oval;
     }
     Bitmap mydraw(int i) {
-        Bitmap bmp_oval = Bitmap.createBitmap(dpToPx(333), dpToPx(173), Bitmap.Config.ARGB_8888);
+        Bitmap bmp_oval = Bitmap.createBitmap(dpToPx(400), dpToPx(400), Bitmap.Config.ARGB_8888);
         Paint paint_oval = new Paint();
         paint_oval.setAntiAlias(true);
         paint_oval.setColor(Color.BLACK);
         Canvas c_oval = new Canvas(bmp_oval);
-        c_oval.drawRect(dpToPx(177), dpToPx(10*i+7), dpToPx(180), dpToPx(10*i+76), paint_oval);
-        RectF rect = new RectF(dpToPx(153), dpToPx(10*i+67), dpToPx(180), dpToPx(10*i+87));
+        c_oval.drawRect(dpToPx(217), dpToPx(23*i+62), dpToPx(222), dpToPx(23*i+162), paint_oval);
+        RectF rect = new RectF(dpToPx(160), dpToPx(23*i+144), dpToPx(222), dpToPx(23*i+190));
         c_oval.drawOval(rect, paint_oval);
         return bmp_oval;
     }
     Bitmap mydraw_c() {
-        Bitmap bmp_oval = Bitmap.createBitmap(dpToPx(333), dpToPx(133), Bitmap.Config.ARGB_8888);
+        Bitmap bmp_oval = Bitmap.createBitmap(dpToPx(400), dpToPx(400), Bitmap.Config.ARGB_8888);
         Paint paint_oval = new Paint();
         paint_oval.setAntiAlias(true);
         paint_oval.setColor(Color.BLACK);
         Canvas c_oval = new Canvas(bmp_oval);
-        c_oval.drawRect(dpToPx(177), dpToPx(47), dpToPx(180), dpToPx(117), paint_oval);
-        c_oval.drawRect(dpToPx(143), dpToPx(115), dpToPx(190), dpToPx(118), paint_oval);
-        RectF rect = new RectF(dpToPx(153), dpToPx(107), dpToPx(180), dpToPx(127));
+        c_oval.drawRect(dpToPx(217), dpToPx(200), dpToPx(222), dpToPx(300), paint_oval);
+        c_oval.drawRect(dpToPx(150), dpToPx(303), dpToPx(232), dpToPx(307), paint_oval);
+        RectF rect = new RectF(dpToPx(160), dpToPx(282), dpToPx(222), dpToPx(328));
         c_oval.drawOval(rect, paint_oval);
         return bmp_oval;
     }
