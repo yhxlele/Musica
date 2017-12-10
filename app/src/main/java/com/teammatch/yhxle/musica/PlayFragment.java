@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -78,6 +79,10 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
     public static final int E5 = 76;
     public static final int F5 = 77;
     public static final MediaPlayer mp = new MediaPlayer();
+    public static final Handler myHandler = new Handler();
+
+    private static InputStream inputStream = null;
+    private static Sequence sequence = null;
 
     public static MediaPlayer mpp = new MediaPlayer();
     private Uri myUri = null;
@@ -165,218 +170,248 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
         public static final String[] NOTE_NAMES = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
 
 
-        public void MyRead(InputStream inputStream) throws Exception {
+        public void MyRead(InputStream inputStream, int currentTick, Sequence sequence) {
 
+                    currentTick = (currentTick * 16) / 500;
 
-                    Sequence sequence = MidiSystem.getSequence(inputStream);
+                    // Sequence sequence = null;
+                    try {
+                        // sequence = MidiSystem.getSequence(inputStream);
 
-                    int trackNumber = 0;
+                        int trackNumber = 0;
 
-                    for (Track track : sequence.getTracks())
+                        for (Track track : sequence.getTracks())
 
-                    {
-                        trackNumber++;
-                        Log.e(TAG, "Track " + trackNumber + ": size = " + track.size());
-                        for (int i = 0; i < track.size(); i++) {
-                            MidiEvent event = track.get(i);
-                            Log.e(TAG, "@" + event.getTick() + " ");
-                            MidiMessage message = event.getMessage();
-                            if (message instanceof ShortMessage) {
-                                ShortMessage sm = (ShortMessage) message;
-                                Log.e(TAG, "Channel: " + sm.getChannel() + " ");
-                                if (sm.getCommand() == NOTE_ON) {
-                                    int key = sm.getData1();
-                                    int octave = (key / 12) - 1;
-                                    int note = key % 12;
-                                    String noteName = NOTE_NAMES[note];
-                                    int velocity = sm.getData2();
-                                    Log.e(TAG, "Note on, " + noteName + octave + " key=" + key + " velocity: " + velocity);
-                                    final TextView textView = (TextView) myView.findViewById(R.id.show);
-                                    final ImageView note_imageview = (ImageView) myView.findViewById(R.id.note);
-                                    switch (key) {
-                                        case C4: {
-                                            textView.postDelayed( new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    textView.setText("Middle C");
+                        {
+                            trackNumber++;
+                            Log.e(TAG, "Track " + trackNumber + ": size = " + track.size());
+                            for (int i = 0; i < track.size(); i++) {
+                                MidiEvent event = track.get(i);
+                                Log.e(TAG, "@" + event.getTick() + " ");
+                                MidiMessage message = event.getMessage();
+                                if (message instanceof ShortMessage) {
+                                    ShortMessage sm = (ShortMessage) message;
+                                    Log.e(TAG, "Channel: " + sm.getChannel() + " ");
+                                    if (sm.getCommand() == NOTE_ON) {
+                                        int key = sm.getData1();
+                                        int octave = (key / 12) - 1;
+                                        int note = key % 12;
+                                        String noteName = NOTE_NAMES[note];
+                                        int velocity = sm.getData2();
+                                        Log.e(TAG, "Note on, " + noteName + octave + " key=" + key + " velocity: " + velocity);
+
+                                        final TextView textView = (TextView) myView.findViewById(R.id.show);
+                                        final ImageView note_imageview = (ImageView) myView.findViewById(R.id.note);
+                                        switch (key) {
+                                            case C4: {
+                                                if (currentTick <= event.getTick()) {
+                                                    myHandler.postDelayed( new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            textView.setText("Middle C");
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                    myHandler.postDelayed(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            note_imageview.setImageBitmap(mydraw_c());
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
                                                 }
-                                            }, event.getTick()*500/16);
-                                            note_imageview.postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    note_imageview.setImageBitmap(mydraw_c());
+                                                break;
+                                            }
+                                            case D4: {
+                                                if (currentTick <= event.getTick()) {
+                                                    myHandler.postDelayed( new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            textView.setText("Middle D");
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                    myHandler.postDelayed(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            note_imageview.setImageBitmap(mydraw(5));
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
                                                 }
-                                            }, event.getTick()*500/16);
-                                            break;
+                                                break;
+                                            }
+                                            case E4: {
+                                                if (currentTick <= event.getTick()) {
+                                                    myHandler.postDelayed( new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            textView.setText("Middle E");
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                    myHandler.postDelayed(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            note_imageview.setImageBitmap(mydraw(4));
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                }
+                                                break;
+                                            }
+                                            case F4: {
+                                                if (currentTick <= event.getTick()) {
+                                                    myHandler.postDelayed( new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            textView.setText("Middle F");
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                    myHandler.postDelayed(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            note_imageview.setImageBitmap(mydraw(3));
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                }
+                                                break;
+                                            }
+                                            case G4: {
+                                                if (currentTick <= event.getTick()) {
+                                                    myHandler.postDelayed( new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            textView.setText("Middle G");
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                    myHandler.postDelayed(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            note_imageview.setImageBitmap(mydraw(2));
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                }
+                                                break;
+                                            }
+                                            case A4: {
+                                                if (currentTick <= event.getTick()) {
+                                                    myHandler.postDelayed( new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            textView.setText("Middle A");
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                    myHandler.postDelayed(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            note_imageview.setImageBitmap(mydraw(1));
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                }
+                                                break;
+                                            }
+                                            case B4: {
+                                                if (currentTick <= event.getTick()) {
+                                                    myHandler.postDelayed( new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            textView.setText("Middle B");
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                    myHandler.postDelayed(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            note_imageview.setImageBitmap(mydraw(0));
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                }
+                                                break;
+                                            }
+                                            case C5: {
+                                                if (currentTick <= event.getTick()) {
+                                                    myHandler.postDelayed( new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            textView.setText("High C");
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                    myHandler.postDelayed(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            note_imageview.setImageBitmap(mydraw_high(3));
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                }
+                                                break;
+                                            }
+                                            case D5: {
+                                                if (currentTick <= event.getTick()) {
+                                                    myHandler.postDelayed( new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            textView.setText("High D");
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                    myHandler.postDelayed(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            note_imageview.setImageBitmap(mydraw_high(2));
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                }
+                                                break;
+                                            }
+                                            case E5: {
+                                                if (currentTick <= event.getTick()) {
+                                                    myHandler.postDelayed( new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            textView.setText("High E");
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                    myHandler.postDelayed(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            note_imageview.setImageBitmap(mydraw_high(1));
+                                                        }
+                                                    }, (event.getTick() - currentTick) * 500/16);
+                                                }
+                                                break;
+                                            }
+                                            case F5: {
+                                                if (currentTick <= event.getTick()) {
+                                                        myHandler.postDelayed( new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                textView.setText("High F");
+                                                            }
+                                                        }, (event.getTick() - currentTick) * 500/16);
+                                                        myHandler.postDelayed(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                note_imageview.setImageBitmap(mydraw_high(0));
+                                                            }
+                                                        }, (event.getTick() - currentTick) * 500/16);
+                                                    }
+                                                break;
+                                            }
+                                            default:
+                                                break;
                                         }
-                                        case D4: {
-                                            textView.postDelayed( new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    textView.setText("Middle D");
-                                                }
-                                            }, event.getTick()*500/16);
-                                            note_imageview.postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    note_imageview.setImageBitmap(mydraw(5));
-                                                }
-                                            },event.getTick()*500/16);
-                                            break;
-                                        }
-                                        case E4: {
-                                            textView.postDelayed( new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    textView.setText("Middle E");
-                                                }
-                                            }, event.getTick()*500/16);
-                                            note_imageview.postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    note_imageview.setImageBitmap(mydraw(4));
-                                                }
-                                            }, event.getTick()*500/16);
-                                            break;
-                                        }
-                                        case F4: {
-                                            textView.postDelayed( new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    textView.setText("Middle F");
-                                                }
-                                            }, event.getTick()*500/16);
-                                            note_imageview.postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    note_imageview.setImageBitmap(mydraw(3));
-                                                }
-                                            }, event.getTick()*500/16);
-                                            break;
-                                        }
-                                        case G4: {
-                                            textView.postDelayed( new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    textView.setText("Middle G");
-                                                }
-                                            }, event.getTick()*500/16);
-                                            note_imageview.postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    note_imageview.setImageBitmap(mydraw(2));
-                                                }
-                                            }, event.getTick()*500/16);
-                                            break;
-                                        }
-                                        case A4: {
-                                            textView.postDelayed( new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    textView.setText("Middle A");
-                                                }
-                                            }, event.getTick()*500/16);
-                                            note_imageview.postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    note_imageview.setImageBitmap(mydraw(1));
-                                                }
-                                            }, event.getTick()*500/16);
-                                            break;
-                                        }
-                                        case B4: {
-                                            textView.postDelayed( new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    textView.setText("Middle B");
-                                                }
-                                            }, event.getTick()*500/16);
-                                            note_imageview.postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    note_imageview.setImageBitmap(mydraw(0));
-                                                }
-                                            }, event.getTick()*500/16);
-                                            break;
-                                        }
-                                        case C5: {
-                                            textView.postDelayed( new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    textView.setText("High C");
-                                                }
-                                            }, event.getTick()*500/16);
-                                            note_imageview.postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    note_imageview.setImageBitmap(mydraw_high(3));
-                                                }
-                                            }, event.getTick()*500/16);
-                                            break;
-                                        }
-                                        case D5: {
-                                            textView.postDelayed( new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    textView.setText("High D");
-                                                }
-                                            }, event.getTick()*500/16);
-                                            note_imageview.postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    note_imageview.setImageBitmap(mydraw_high(2));
-                                                }
-                                            }, event.getTick()*500/16);
-                                            break;
-                                        }
-                                        case E5: {
-                                            textView.postDelayed( new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    textView.setText("High E");
-                                                }
-                                            }, event.getTick()*500/16);
-                                            note_imageview.postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    note_imageview.setImageBitmap(mydraw_high(1));
-                                                }
-                                            }, event.getTick()*500/16);
-                                            break;
-                                        }
-                                        case F5: {
-                                            textView.postDelayed( new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    textView.setText("High F");
-                                                }
-                                            }, event.getTick()*500/16);
-                                            note_imageview.postDelayed(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    note_imageview.setImageBitmap(mydraw_high(0));
-                                                }
-                                            }, event.getTick()*500/16);
-                                            break;
-                                        }
-                                        default:
-                                            break;
+                                    } else if (sm.getCommand() == NOTE_OFF) {
+                                        int key = sm.getData1();
+                                        int octave = (key / 12) - 1;
+                                        int note = key % 12;
+                                        String noteName = NOTE_NAMES[note];
+                                        int velocity = sm.getData2();
+                                        Log.e(TAG, "Note off, " + noteName + octave + " key=" + key + " velocity: " + velocity);
+                                    } else {
+                                        Log.e(TAG, "Command:" + sm.getCommand());
                                     }
-                                } else if (sm.getCommand() == NOTE_OFF) {
-                                    int key = sm.getData1();
-                                    int octave = (key / 12) - 1;
-                                    int note = key % 12;
-                                    String noteName = NOTE_NAMES[note];
-                                    int velocity = sm.getData2();
-                                    Log.e(TAG, "Note off, " + noteName + octave + " key=" + key + " velocity: " + velocity);
                                 } else {
-                                    Log.e(TAG, "Command:" + sm.getCommand());
+                                    Log.e(TAG, "Other message: " + message.getClass());
                                 }
-                            } else {
-                                Log.e(TAG, "Other message: " + message.getClass());
                             }
-                        }
 
+                        }
+                    }
+                    catch (Exception e) {
+                        Log.e(TAG, e.toString());
                     }
 
         }
@@ -617,12 +652,12 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                     // -i <instrument number> default 0, a piano.  Allowed values: 0-127
                     // -t <beats per minute>  default tempo is 120 quarter notes per minute
                     // -o <filename>          save to a midi file instead of playing
-                    int a = 0;
+                    //int a = 0;
                     instrument = 0;
-                    a+=2;
+                    //a+=2;
 
                     tempo = 120;
-                    a+=2;
+                    //a+=2;
 
                     char[  ] notes = "/2E /4G + /kD /2C - /4G /kF /2E /4E E F G /kA G /2E /4G + /kD /2C - /4G /kF /2E /4G G A B + /kC C /8D . . - G /4G B A G /2E /4G + /kC - /2A + /4C /2D /4C - /kB G /2E /4G + /kD /2C - /4G /kF /2E /4G G A B + /kC C".toCharArray( );
 
@@ -717,10 +752,13 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
                     songPosition = mp.getCurrentPosition();
                     myStopButton.setText("Resume");
                     songIsPlaying = false;
+                    myHandler.removeCallbacksAndMessages(null);
                 }
                 else {
                     mp.seekTo(songPosition);
                     mp.start();
+
+                    MyRead(inputStream, mp.getCurrentPosition(), sequence);
                     myStopButton.setText("Stop");
                     songIsPlaying = true;
                 }
@@ -739,11 +777,14 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
             mp.prepare();
             mp.start();
             songIsPlaying = true;
+            Button myStop = (Button) myView.findViewById(R.id.stop);
+            myStop.setText("STOP");
             //      mediaPlayer.release();
             //      f.delete();
-            InputStream inputStream = getContext().getContentResolver().openInputStream(myUri);
-            MyRead(inputStream);
-            inputStream.close();
+            inputStream = getContext().getContentResolver().openInputStream(myUri);
+            sequence = MidiSystem.getSequence(inputStream);
+
+            MyRead(inputStream, mp.getCurrentPosition(), sequence);
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }

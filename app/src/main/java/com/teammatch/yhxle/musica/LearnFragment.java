@@ -1,5 +1,6 @@
 package com.teammatch.yhxle.musica;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
@@ -15,12 +16,16 @@ import android.media.MediaPlayer;
 // import android.media.midi.*;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,6 +33,7 @@ import android.widget.Toast;
 import com.larvalabs.svgandroid.SVG;
 import com.larvalabs.svgandroid.SVGParser;
 
+import java.io.File;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 
@@ -66,6 +72,9 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
     public static MediaPlayer mpp = new MediaPlayer();
     private Uri myUri = null;
     private View myView;
+
+    public static String recordedNotes = "";
+    private static boolean isRecord = false;
 
     private static final int FILE_SELECT_CODE = 0;
     public static int dpToPx(int dp)
@@ -421,8 +430,10 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
         ImageButton l11 = (ImageButton) view.findViewById(R.id.L11);
         l11.setOnClickListener(this);
         l11.setImageBitmap(bmp_g);
-        //Button record = (Button) view.findViewById(R.id.record);
-        //record.setOnClickListener(this);
+
+        Button record = (Button) view.findViewById(R.id.record);
+        record.setOnClickListener(this);
+
         SVG svg;
         svg = SVGParser.getSVGFromResource (getResources (), R.raw.light_treble_clef);
         ImageView clef_imageview  = (ImageView) view.findViewById (R.id.clef);
@@ -477,6 +488,11 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_057);
                 mpp.start();
+
+                if (isRecord) {
+                    recordedNotes += "+ F - ";
+                }
+
                 break;
             }
             case R.id.L2: {
@@ -486,6 +502,11 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_056);
                 mpp.start();
+
+                if (isRecord) {
+                    recordedNotes += "+ E - ";
+                }
+
                 break;
             }
             case R.id.L3: {
@@ -495,6 +516,11 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_054);
                 mpp.start();
+
+                if (isRecord) {
+                    recordedNotes += "+ D - ";
+                }
+
                 break;
             }
             case R.id.L4: {
@@ -504,6 +530,11 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_052);
                 mpp.start();
+
+                if (isRecord) {
+                    recordedNotes += "+ C - ";
+                }
+
                 break;
             }
             case R.id.L5: {
@@ -513,6 +544,11 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_051);
                 mpp.start();
+
+                if (isRecord) {
+                    recordedNotes += "B ";
+                }
+
                 break;
             }
             case R.id.L6: {
@@ -522,6 +558,11 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_049);
                 mpp.start();
+
+                if (isRecord) {
+                    recordedNotes += "A ";
+                }
+
                 break;
             }
             case R.id.L7: {
@@ -531,6 +572,11 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_047);
                 mpp.start();
+
+                if (isRecord) {
+                    recordedNotes += "G ";
+                }
+
                 break;
             }
             case R.id.L8: {
@@ -549,6 +595,11 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_044);
                 mpp.start();
+
+                if (isRecord) {
+                    recordedNotes += "E ";
+                }
+
                 break;
             }
             case R.id.L10: {
@@ -558,6 +609,11 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_042);
                 mpp.start();
+
+                if (isRecord) {
+                    recordedNotes += "D ";
+                }
+
                 break;
             }
             case R.id.L11: {
@@ -567,83 +623,81 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
                 mpp.release();
                 mpp = MediaPlayer.create(getContext(), R.raw.piano_ff_040);
                 mpp.start();
+
+                if (isRecord) {
+                    recordedNotes += "C ";
+                }
+
                 break;
             }
-            /*
+
             case R.id.record: {
-                Log.e(TAG,"midifile begin ");
                 try {
-                    int instrument = 0;
-                    int tempo = 120;
-                    String filename = "hahah.midi";
 
-                    // Parse the options
-                    // -i <instrument number> default 0, a piano.  Allowed values: 0-127
-                    // -t <beats per minute>  default tempo is 120 quarter notes per minute
-                    // -o <filename>          save to a midi file instead of playing
-                    int a = 0;
-                    instrument = 0;
-                    a+=2;
+                    if (!isRecord) {
+                        Button recordButton = (Button) myView.findViewById(R.id.record);
+                        recordButton.setText("STOP");
+                        isRecord = true;
+                    } else {
+                        try {
+                            isRecord = false;
+                            Button recordButton = (Button) myView.findViewById(R.id.record);
+                            recordButton.setText("Record");
 
-                    tempo = 120;
-                    a+=2;
+                            int instrument = 0;
+                            int tempo = 120;
 
+                            Sequence sequence = new Sequence(Sequence.PPQ, 16);
+                            addTrack(sequence, instrument, tempo, recordedNotes.toCharArray());
 
+                            // A file name was specified, so save the notes
+                            ///  Toast.makeText(getContext(), "Exception caught ERETryty" ,Toast.LENGTH_SHORT).show();
+                            int[] allowedTypes = MidiSystem.getMidiFileTypes(sequence);
 
-
-                    char[  ] notes = "C C G G + A# A# - G/2 F F E# E# D# D# C".toCharArray( );
-
-                    // 16 ticks per quarter note.
-                    Sequence sequence = new Sequence(Sequence.PPQ, 16);
-
-                    // Add the specified notes to the track
-                    addTrack(sequence, instrument, tempo, notes);
-// A file name was specified, so save the notes
-                    ///  Toast.makeText(getContext(), "Exception caught ERETryty" ,Toast.LENGTH_SHORT).show();
-                    int[  ] allowedTypes = MidiSystem.getMidiFileTypes(sequence);
-
-                    if (allowedTypes.length == 0) {
-                        Toast.makeText(getContext(), "No allowTypes" ,Toast.LENGTH_SHORT).show();
-                        System.err.println("No supported MIDI file types.");
-                    }
-                    else {
-                        if (ContextCompat.checkSelfPermission(getActivity(),
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                != PackageManager.PERMISSION_GRANTED) {
-
-                            // Should we show an explanation?
-                            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-                                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-                                Toast.makeText(getContext(),"Ask for Write permission", Toast.LENGTH_SHORT).show();
-
+                            if (allowedTypes.length == 0) {
+                                Toast.makeText(getContext(), "No allowTypes", Toast.LENGTH_SHORT).show();
+                                System.err.println("No supported MIDI file types.");
                             } else {
+                                if (ContextCompat.checkSelfPermission(getActivity(),
+                                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                        != PackageManager.PERMISSION_GRANTED) {
+
+                                    // Should we show an explanation?
+                                    if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                                            Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                                        Toast.makeText(getContext(), "Ask for Write permission", Toast.LENGTH_SHORT).show();
+
+                                    } else {
 
 
-                                ActivityCompat.requestPermissions(getActivity(),
-                                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                        MY_PERMISSIONS_WRITE_EXTERNAL_FILE);
+                                        ActivityCompat.requestPermissions(getActivity(),
+                                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                                MY_PERMISSIONS_WRITE_EXTERNAL_FILE);
+
+                                    }
+                                }
+
+                                while (ContextCompat.checkSelfPermission(getActivity(),
+                                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                        != PackageManager.PERMISSION_GRANTED) {
+                                    Toast.makeText(getContext(), "failpermission", Toast.LENGTH_SHORT).show();
+                                }
+
+                                File f = new File(Environment.getExternalStoragePublicDirectory(
+                                        Environment.DIRECTORY_MUSIC), "record.mid");
+                                f.createNewFile();
+
+                                MidiSystem.write(sequence, allowedTypes[0], f);
 
                             }
+                        } catch (Exception e) {
+                            Log.e(TAG, e.toString());
                         }
 
-                        while (ContextCompat.checkSelfPermission(getActivity(),
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                != PackageManager.PERMISSION_GRANTED) {
-                            Toast.makeText(getContext(),"failpermission", Toast.LENGTH_SHORT).show();
-                        }
-
-                        File f = new File(Environment.getExternalStoragePublicDirectory(
-                                Environment.DIRECTORY_MUSIC), "ajajf.mid");
-                        f.createNewFile();
-
-                        MidiSystem.write(sequence, allowedTypes[0], f);
-
-                        showFileChooser();
+                }
 
 
-
-                    }
                 } catch(Exception e) {
 
                     Toast.makeText(getContext(), "Exception caught " + e.toString(),Toast.LENGTH_SHORT).show();
@@ -651,7 +705,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
 
                 break;
             }
-            */
+
             default:
                 break;
         }
@@ -699,7 +753,7 @@ public class LearnFragment extends Fragment implements View.OnClickListener {
 
     static final int[  ] offsets = {  // add these amounts to the base value
             // A   B  C  D  E  F  G
-            -4, -2, 0, 1, 3, 5, 7
+            9, 11, 0, 2, 4, 5, 7
     };
 
     /*

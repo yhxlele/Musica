@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.larvalabs.svgandroid.SVG;
 import com.larvalabs.svgandroid.SVGParser;
@@ -33,6 +35,7 @@ public class QuizActivity extends Activity {
 
     private boolean enable_show_correct;
     private boolean enable_vibration_on_wrong;
+    private int singleQuestionWrongTime = 0;
 
     private ImageView clef_imageview;
     private ImageView note_imageview;
@@ -324,28 +327,61 @@ public class QuizActivity extends Activity {
 
     private void clicked (int note_id)
     {
+
         if (note_id != current_note)
         {
             ++num_wrong;
 
-            if (enable_show_correct) {
+            if (singleQuestionWrongTime >= 3) {
                 current_button.setTextColor (Color.BLUE);
-                current_button.setTypeface (Typeface.DEFAULT_BOLD);
+                final Toast toast = Toast.makeText(getApplicationContext(), "okay...the blue option is the correct answer", Toast.LENGTH_SHORT);
+                toast.show();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        toast.cancel();
+                    }
+                }, 1000);
+            }
+            else {
+                final Toast toast = Toast.makeText(getApplicationContext(), "Wrong!", Toast.LENGTH_SHORT);
+                toast.show();
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        toast.cancel();
+                    }
+                }, 300);
+                singleQuestionWrongTime++;
             }
 
-            if (enable_vibration_on_wrong) {
-                ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(250L);
-            }
+            current_button.setTypeface (Typeface.DEFAULT_BOLD);
+
+
         }
         else {
+            final Toast toast = Toast.makeText(getApplicationContext(), "Good!", Toast.LENGTH_SHORT);
+            toast.show();
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    toast.cancel();
+                }
+            }, 500);
+
+
             ++num_right;
+
+            singleQuestionWrongTime = 0;
+
             long time_end = System.currentTimeMillis ();
             time_sum += (long)(time_end - time_note_start);
 
-            if (enable_show_correct) {
-                current_button.setTextColor (default_color);
-                current_button.setTypeface (Typeface.DEFAULT);
-            }
+            current_button.setTextColor (default_color);
+            current_button.setTypeface (Typeface.DEFAULT);
 
             if (!next_note ()) {
                 Intent intent = new Intent(this, ResultsActivity.class);
