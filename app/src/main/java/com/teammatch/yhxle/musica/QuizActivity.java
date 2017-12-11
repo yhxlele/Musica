@@ -466,11 +466,21 @@ public class QuizActivity extends Activity {
             default:
                 break;
         }
-        mpp.reset();
-        mpp.release();
-        Log.e(TAG, Integer.toString(sound));
-        mpp = MediaPlayer.create(this, sounds[sound-1]);
-        mpp.start();
+        Handler handler = new Handler();
+        final int playSound = sound;
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mpp.reset();
+                mpp.release();
+                Log.e(TAG, Integer.toString(playSound));
+                mpp = MediaPlayer.create(getApplicationContext(), sounds[playSound-1]);
+                mpp.start();
+            }
+        }, 1000);
+
+
+
         current_note   = (first_note[clef] + note) % 7;
         current_button = buttons[current_note];
 
