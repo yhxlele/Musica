@@ -101,7 +101,7 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
 
     private void showFileChooser() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*");
+        intent.setType("audio/midi");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
         try {
@@ -698,52 +698,6 @@ public class PlayFragment extends Fragment implements View.OnClickListener {
 
                     Toast.makeText(getContext(), "Exception caught " + e.toString(),Toast.LENGTH_SHORT).show();
                 }
-/*
-                try
-                {
-//****  Create a new MIDI sequence with 24 ticks per beat  ****
-                    Sequence s = new Sequence(Sequence.PPQ,24);
-
-//****  Obtain a MIDI track from the sequence  ****
-                    Track t = s.createTrack();
-
-                    ShortMessage myMsg = new ShortMessage();
-                    // Play the note Middle C (60) moderately loud
-                    // (velocity = 93)on channel 4 (zero-based).
-                    myMsg.setMessage(ShortMessage.NOTE_ON, 4, 60, 93);
-
-                    MidiEvent md = new MidiEvent(myMsg, 0);
-                    t.add(md);
-
-
-//****  write the MIDI sequence to a MIDI file  ****
-                    Toast.makeText(getContext(),
-                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString(),
-                            Toast.LENGTH_SHORT).show();
-                    File f = new File(Environment.getExternalStoragePublicDirectory(
-                            Environment.DIRECTORY_PICTURES), "mididi.mid");
-                    f.createNewFile();
-                    MidiSystem.write(s,1,f);
-
-                    Uri myUri = Uri.fromFile(f);
-                    MediaPlayer mediaPlayer = new MediaPlayer();
-                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                    mediaPlayer.setDataSource(getContext(), myUri);
-                    mediaPlayer.prepare();
-                    mediaPlayer.start();
-
-
-                } //try
-                catch(Exception e)
-                {
-                    Toast.makeText(getContext(), "Exception caught " + e.toString(),Toast.LENGTH_SHORT).show();
-                } //catch
-                Log.e(TAG,ln("midifile end ");
-
-
-                MediaPlayer mediaPlayer = MediaPlayer.create(getContext(), R.raw.midifile);
-                mediaPlayer.start(); // no need to call prepare(); create() does that for you
-                */
                 break;
             }
             case R.id.stop: {

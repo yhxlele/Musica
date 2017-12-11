@@ -22,7 +22,7 @@ public class PlayFragmentPageAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             return PlayFragment.newInstance();
         }
-        return PlayPhotoFragment.newInstance();
+        return MuseScoreFragment.newInstance();
     }
 
     @Override

@@ -23,8 +23,8 @@ public class PlayActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         tab_array = new ArrayList<>();
-        tab_array.add("Midi");
-        tab_array.add("Photo");
+        tab_array.add("Audio->Notes");
+        tab_array.add("Image->Audio");
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText(tab_array.get(0)));

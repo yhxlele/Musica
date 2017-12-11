@@ -23,8 +23,8 @@ public class LearnActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         tab_array = new ArrayList<>();
-        tab_array.add("Learning");
-        tab_array.add("Quiz");
+        tab_array.add("Learn Notes");
+        tab_array.add("Quizzes");
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText(tab_array.get(0)));

@@ -78,6 +78,4 @@ public class OverviewActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
 }
