@@ -163,6 +163,9 @@ public class MuseScoreFragment extends Fragment implements View.OnClickListener 
                             urlString = "<iframe src=\"https://drive.google.com/file/d/1Dlh80Zu8E5gnYRvYMVyYlO11dSsApjTf/preview\" width=\"640\" height=\"480\"></iframe>";
                             break;
                         }
+                        case "white.pdf": {
+                            urlString = "<iframe src=\"https://drive.google.com/file/d/1noRd-kfRpeT1CsFbTZAX_qC2C_ptOc2Z/preview\" width=\"640\" height=\"480\"></iframe>";
+                        }
                     }
 
                     museScoreWebView.loadData(urlString, "text/html", null);

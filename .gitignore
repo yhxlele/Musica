@@ -4,3 +4,5 @@ Musica.iml
 app/app.iml
 build/
 local.properties
+.DS_Store
+app/app-release.apk

@@ -9,12 +9,17 @@ Musica is published to Google Play.
 - pitch-training
 - sight-reading
 
+![navigation](snapshot/navigation.jpeg)
+
 ## Note-reading:
 The note-reading feature is achieved by a five-line user interface. The user 
 is able to tap on any position in the five lines. Correspondingly, Musica is 
 able to play the pitch of the note being tapped.
 
-![note-reading](snapshot/learn.png)
+We have also provide the recording feature that is able to record the pitches 
+that the users have tapped.
+
+![note-reading](snapshot/note-reading.jpeg)
 
 
 ## Pitch-training:
@@ -24,7 +29,8 @@ navigation page. Then Musica would show up a five-line page and all possible
 answers for each music note shown in the five lines. The user is responsible 
 for tapping the correct name of the note in order to pass the quiz question.
 
-![note-reading](snapshot/inQuiz.png)
+![pitch-training1](snapshot/quiz.jpeg)
+![pitch-training2](snapshot/quizResult.jpeg)
 
 ## Sight-reading:
 By alleviating the technology barriers, the sight-reading assistance is 
@@ -32,4 +38,9 @@ completed by recognizing audio files and output the correct music sheets,
 and thus the users are able to compare their sight-reading result with 
 correct sight-reading.
 
-![note-reading](snapshot/select.png)
+We have also utilize the muse score service to convert the pdf music sheet
+into the audio files.
+
+![sight-reading1](snapshot/midi.jpeg)
+![sight-reading2](snapshot/imageInstruction.jpeg)
+![sight-reading3](snapshot/imageDisplay.jpeg)
